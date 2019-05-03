@@ -1,11 +1,28 @@
-本次vim配置是独家配置，配置文件已经隐藏
+# dst_vimconfig
 
-安装：
-输入./install.sh 可以自动完成配置
+## English
 
-卸载：
-输入./uninstall.sh 可以自动还原为原来配置
+### Install
+```
+sudo ./install.sh
+```
 
-注意：
+### Uninstall
+```
+sudo ./uninstall.sh
+```
+## Chinese
+
+### 安装：
+```
+sudo ./install.sh
+```
+
+### 卸载：
+```
+sudo ./uninstall.sh
+```
+
+### 注意：
 	在配置之前，您要确保你机器已经安装好vim
 	即您之前已经做过sudo apt-get install vim 这样的操作,如果没有请先安装vim 
