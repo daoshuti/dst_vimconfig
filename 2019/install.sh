@@ -19,13 +19,13 @@ function config_vim()
 {
 	echo "Config your vim now !"
 	rm -rf $HOME/.vim 
-	cp ./.vim  $HOME -a 
-	cp ./.vimrc $HOME 
+	cp ./vim  $HOME -a 
+	cp ./vimrc $HOME 
 
 	#生成tags文件
-	echo "Make tags in /usr/include"
-	cd /usr/include
-	sudo ctags -I __THROW -I __THROWNL -I __nonnull -R --c-kinds=+p --fields=+iaS --extra=+q
+	#echo "Make tags in /usr/include"
+	#cd /usr/include
+	#sudo ctags -I __THROW -I __THROWNL -I __nonnull -R --c-kinds=+p --fields=+iaS --extra=+q
 }
 
 #主函数
