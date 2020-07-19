@@ -19,13 +19,9 @@ function config_vim()
 {
 	echo "Config your vim now !"
 	rm -rf $HOME/.vim 
-	cp ./vim  $HOME/.vim -a
-	cp ./vimrc $HOME/.vimrc
-
-	#生成tags文件
-	#echo "Make tags in /usr/include"
-	#cd /usr/include
-	#sudo ctags -I __THROW -I __THROWNL -I __nonnull -R --c-kinds=+p --fields=+iaS --extra=+q
+	cp ./vimrc $HOME/.vimrc 
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 }
 
 #主函数

@@ -130,11 +130,14 @@ Plug 'plasticboy/vim-markdown'
 " vim文字和背景配色
 Plug 'altercation/vim-colors-solarized'
 
-" ctrlp快速搜索文件并打开
-"Plug 'kien/ctrlp.vim' " 有用，但是非高频使用注释掉
+" 代码自动补全插件
+Plug 'Shougo/neocomplete.vim'
 
 " C++代码补全，比较古老，不是很好用
 "Plug 'vim-scripts/OmniCppComplete'
+
+" ctrlp快速搜索文件并打开
+"Plug 'kien/ctrlp.vim' " 有用，但是非高频使用注释掉
 
 " --------------------------------------------------------}}}2
 " 延迟按需加载，使用到命令的时候再加载的插件
@@ -320,6 +323,96 @@ let g:rainbow_conf = {
 " 	--c++-kinds=+p : 为C++文件增加函数原型的标签
 " 	--fields=+iaS : 在标签文件中加入继承信息(i)、类成员的访问控制信息(a)、以及函数的指纹(S)
 " 	--extra=+q : 为标签增加类修饰符。注意，如果没有此选项，将不能对类成员补全
+
+" --------------------------------------------------------}}}2
+" neocomplete 补全插件，不支持Vim8.2以上，新版本推荐deoplete.nvim
+" --------------------------------------------------------{{{2
+
+"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" 注意：此选项必须在.vimrc(_vimrc)中设置。不要在.gvimrc(_gvimrc)中设置！
+" Disable AutoComplPop. 禁用 AutoComplPop
+let g:acp_enableAtStartup = 0
+" Use neocomplete. 使用neocomplete
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase. 使用智能大小写
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length. 设定最短的语法关键字的长度
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary. 定义字典
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword. 定义关键字
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings. 插件键映射
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" 推荐的键盘映射
+
+" <CR>: close popup and save indent.
+" 回车键: 关闭弹出窗口并保存缩进
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+
+" <TAB>: completion.
+" <TAB>键补全
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" <C-h>, <BS>: close popup and delete backword char.
+" <C-h>, <BS>键关闭弹出窗口并删除
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+" Close popup by <Space>.
+" 通过<Space>关闭弹出窗口
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+" 类似于AutoComplPop的行为
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+" 类似于Shell的行为（不推荐）
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+" 启用omni补全
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+" 启用笨重的omni补全
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" 对于perlomni.vim设置
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " --------------------------------------------------------}}}2
 " Man.vim Man手册插件 这个插件是vim自带的
