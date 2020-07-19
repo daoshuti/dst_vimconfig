@@ -117,27 +117,61 @@ Plug 'luochen1990/rainbow'
 " 输入时自动配对括号
 Plug 'jiangmiao/auto-pairs'
 
-" vim输入时自动补全，文件名和路径之类的，比较古老，暂无好的替代品
+" AutoComplPop 是按字典进行补全的，只有你输入过的单词才可以补全
+" 默认只有输入两个字符，才会提示
+" vim输入时自动补全提示 比较古老，暂无好的替代品
 Plug 'eikenb/acp'
 
 " ctags管理
 Plug 'ludovicchabant/vim-gutentags'
 
 " markdown
-Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
 " vim文字和背景配色
-"Plug 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized'
+
+" airline 状态栏插件
+Plug 'vim-airline/vim-airline'
 
 " 代码自动补全插件
 Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'honza/vim-snippets'
 
 " C++代码补全，比较古老，不是很好用
 Plug 'vim-scripts/OmniCppComplete'
 
+" Go Lang 插件
+Plug 'fatih/vim-go'
+
+" Python 插件
+Plug 'klen/python-mode'
+Plug 'yssource/python.vim'
+Plug 'vim-scripts/python_match.vim'
+Plug 'vim-scripts/pythoncomplete'
+
+" 语法检查，需配合相应的语法检查器
+Plug 'vim-syntastic/syntastic'
+
 " ctrlp快速搜索文件并打开
 "Plug 'kien/ctrlp.vim' " 有用，但是非高频使用注释掉
+
+" vimcdoc中文vim文档
+Plug 'yianwillis/vimcdoc'
+
+" Disable if python support not present
+if !has('python') && !has('python3')
+	let g:pymode = 0
+endif
+
+if isdirectory(expand("~/.vim/bundle/python-mode"))
+	let g:pymode_lint_checkers = ['pyflakes']
+	let g:pymode_trim_whitespaces = 0
+	let g:pymode_options = 0
+	let g:pymode_rope = 0
+endif
 
 " --------------------------------------------------------}}}2
 " 延迟按需加载，使用到命令的时候再加载的插件
@@ -152,7 +186,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 " gocode go语言代码补全插件
-Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+"Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
 " --------------------------------------------------------}}}2
 " 开始初始化插件
@@ -260,8 +294,7 @@ let g:gutentags_auto_add_gtags_cscope = 0
 "let g:markdown_minlines = 100 "支持100行显示（默认50行），开启后可能会卡
 
 " --------------------------------------------------------}}}2
-" 配置rainbow插件
-" 显示彩色的括号
+" 配置rainbow插件，显示彩色的括号
 " --------------------------------------------------------{{{2
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
@@ -326,26 +359,22 @@ let g:OmniCpp_SelectFirstItem=2
 " 	--extra=+q : 为标签增加类修饰符。注意，如果没有此选项，将不能对类成员补全
 
 " --------------------------------------------------------}}}2
-" neocomplete 补全插件，不支持Vim8.2以上，新版本推荐deoplete.nvim
+" 配置neocomplete 补全插件，不支持Vim8.2以上，新版本推荐deoplete.nvim
 " --------------------------------------------------------{{{2
 
-"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" 注意：此选项必须在.vimrc(_vimrc)中设置。不要在.gvimrc(_gvimrc)中设置！
-" Disable AutoComplPop. 禁用 AutoComplPop
-let g:acp_enableAtStartup = 0
-" Use neocomplete. 使用neocomplete
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase. 使用智能大小写
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length. 设定最短的语法关键字的长度
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:acp_enableAtStartup = 0 " 禁用acp(AutoComplPop)
+let g:neocomplete#enable_at_startup = 1 " 打开neocomplete
+let g:neocomplete#enable_smart_case = 1 " 智能大小写
+let g:neocomplete#enable_auto_delimiter = 1 " 自动分隔符
+let g:neocomplete#max_list = 15 " 下拉菜单最多15行
+let g:neocomplete#force_overwrite_completefunc = 1 " 强制覆盖completefunc
 
 " Define dictionary. 定义字典
 let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'default' : '',
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+    \ }
 
 " Define keyword. 定义关键字
 if !exists('g:neocomplete#keyword_patterns')
@@ -353,79 +382,133 @@ if !exists('g:neocomplete#keyword_patterns')
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" Plugin key-mappings. 插件键映射
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+" complete-key-map-setting 
+" --------------------------------------------------------
+" <C-k> Complete Snippet
+" <C-k> Jump to next snippet point
+imap <silent><expr><C-k> neosnippet#expandable() ?
+            \ "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ?
+            \ "\<C-e>" : "\<Plug>(neosnippet_expand_or_jump)")
+smap <TAB> <Right><Plug>(neosnippet_jump_or_expand)
 
-" Recommended key-mappings.
-" 推荐的键盘映射
+inoremap <expr><C-g> neocomplete#undo_completion()
+inoremap <expr><C-l> neocomplete#complete_common_string()
+"inoremap <expr><CR> neocomplete#complete_common_string()
 
-" <CR>: close popup and save indent.
-" 回车键: 关闭弹出窗口并保存缩进
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
+" <CR>: close popup
+" <s-CR>: close popup and save indent.
+inoremap <expr><s-CR> pumvisible() ? neocomplete#smart_close_popup()."\<CR>" : "\<CR>"
+
+function! CleverCr()
+    if pumvisible()
+        if neosnippet#expandable()
+            let exp = "\<Plug>(neosnippet_expand)"
+            return exp . neocomplete#smart_close_popup()
+        else
+            return neocomplete#smart_close_popup()
+        endif
+    else
+        return "\<CR>"
+    endif
 endfunction
 
-" <TAB>: completion.
-" <TAB>键补全
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
+" <CR> close popup and save indent or expand snippet
+imap <expr> <CR> CleverCr()
 " <C-h>, <BS>: close popup and delete backword char.
-" <C-h>, <BS>键关闭弹出窗口并删除
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y> neocomplete#smart_close_popup()
+" <TAB>: completion.
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
-" Close popup by <Space>.
-" 通过<Space>关闭弹出窗口
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+" Courtesy of Matteo Cavalleri
 
-" AutoComplPop like behavior.
-" 类似于AutoComplPop的行为
-"let g:neocomplete#enable_auto_select = 1
+function! CleverTab()
+    if pumvisible()
+        return "\<C-n>"
+    endif
+    let substr = strpart(getline('.'), 0, col('.') - 1)
+    let substr = matchstr(substr, '[^ \t]*$')
+    if strlen(substr) == 0
+        " nothing to match on empty string
+        return "\<Tab>"
+    else
+        " existing text matching
+        if neosnippet#expandable_or_jumpable()
+            return "\<Plug>(neosnippet_expand_or_jump)"
+        else
+            return neocomplete#start_manual_complete()
+        endif
+    endif
+endfunction
 
-" Shell like behavior(not recommended).
-" 类似于Shell的行为（不推荐）
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-" 启用omni补全
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+imap <expr> <Tab> CleverTab()
+" --------------------------------------------------------
 
 " Enable heavy omni completion.
 " 启用笨重的omni补全
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" 对于perlomni.vim设置
-" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+
+" Enable omni completion. 启用omni补全
+"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+"autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 " --------------------------------------------------------}}}2
-" Man.vim Man手册插件 这个插件是vim自带的
+" 配置snippets 设置
+" --------------------------------------------------------{{{2
+" Use honza's snippets.
+let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
+
+" Enable neosnippet snipmate compatibility mode
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" For snippet_complete marker.
+if !exists("g:spf13_no_conceal")
+    if has('conceal')
+        set conceallevel=2 concealcursor=i
+    endif
+endif
+
+" Enable neosnippets when using go
+let g:go_snippet_engine = "neosnippet"
+
+" Disable the neosnippet preview candidate window
+" When enabled, there can be too much visual noise
+" especially when splits are used.
+set completeopt-=preview
+
+" --------------------------------------------------------}}}2
+" 配置synatastic 语法检查设置
+" --------------------------------------------------------{{{2
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+
+" --------------------------------------------------------}}}2
+" 配置Man.vim Man手册
 " --------------------------------------------------------{{{2
 source $VIMRUNTIME/ftplugin/man.vim
 
 " --------------------------------------------------------}}}2
-" acp插件 智能显示代码提示
-" --------------------------------------------------------{{{2
-
-" --------------------------------------------------------}}}2
-" auto-pairs插件 括号自动补全()[]{}
+" 配置auto-pairs插件 括号自动补全()[]{}
 " --------------------------------------------------------{{{2
 
 " --------------------------------------------------------}}}2
