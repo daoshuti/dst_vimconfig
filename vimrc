@@ -128,13 +128,13 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
 " vim文字和背景配色
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
 
 " 代码自动补全插件
 Plug 'Shougo/neocomplete.vim'
 
 " C++代码补全，比较古老，不是很好用
-"Plug 'vim-scripts/OmniCppComplete'
+Plug 'vim-scripts/OmniCppComplete'
 
 " ctrlp快速搜索文件并打开
 "Plug 'kien/ctrlp.vim' " 有用，但是非高频使用注释掉
@@ -150,6 +150,9 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
 " 代码速览插件(用tagbar替代了taglist)
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+
+" gocode go语言代码补全插件
+Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
 " --------------------------------------------------------}}}2
 " 开始初始化插件
@@ -169,8 +172,8 @@ call plug#end()
 " 设置vim文字和背景颜色
 
 " 配色主题的色系设置为dark
-set   background=dark
-colorscheme solarized
+"set   background=dark
+"colorscheme solarized
 
 " 配色主题的色系设置为light
 "set   background=light
@@ -312,11 +315,9 @@ let g:rainbow_conf = {
 " --------------------------------------------------------}}}2
 " 配置OmniCppComplete插件
 " --------------------------------------------------------{{{2
-"set nocompatible or set nocp "关闭vi兼容模式(通用设置中已经开启)
-"filetype plugin on "文件类型检查(通用设置中已经开启)
-"let g:OmniCpp_DefaultNamespaces=["std"]
-"let g:OmniCpp_MayCompleteScope=1
-"let g:OmniCpp_SelectFirstItem=2
+let g:OmniCpp_DefaultNamespaces=["std"]
+let g:OmniCpp_MayCompleteScope=1
+let g:OmniCpp_SelectFirstItem=2
 " 生成标签文件命令
 " 	ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .
 " 在对C++文件进行补全时，OmniCppComplete插件需要tag文件中包含C++的额外信息，因此上面的ctags命令不同于以前我们所使用的，它专门为C++语言生成一些额外的信息，上述选项的含义如下：
