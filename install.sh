@@ -27,7 +27,7 @@ function config_vim()
 #主函数
 function main()
 {
-	sudo apt-get install ctags cscope
+	sudo apt install ctags cscope vim-nox vim-gtk3
 	bakup_vimconfig
 	config_vim
 }
