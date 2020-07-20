@@ -142,7 +142,7 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'honza/vim-snippets'
 
 " C++代码补全，比较古老，不是很好用
-Plug 'vim-scripts/OmniCppComplete'
+"Plug 'vim-scripts/OmniCppComplete'
 
 " Go Lang 插件
 Plug 'fatih/vim-go'
@@ -152,15 +152,6 @@ Plug 'klen/python-mode'
 Plug 'yssource/python.vim'
 Plug 'vim-scripts/python_match.vim'
 Plug 'vim-scripts/pythoncomplete'
-
-" 语法检查，需配合相应的语法检查器
-Plug 'vim-syntastic/syntastic'
-
-" ctrlp快速搜索文件并打开
-"Plug 'kien/ctrlp.vim' " 有用，但是非高频使用注释掉
-
-" vimcdoc中文vim文档
-Plug 'yianwillis/vimcdoc'
 
 " Disable if python support not present
 if !has('python') && !has('python3')
@@ -173,6 +164,19 @@ if isdirectory(expand("~/.vim/bundle/python-mode"))
 	let g:pymode_options = 0
 	let g:pymode_rope = 0
 endif
+
+" vim 字典仓库
+"Plug 'asins/vim-dict'
+Plug 'skywind3000/vim-dict'
+
+" 语法检查，需配合相应的语法检查器
+"Plug 'vim-syntastic/syntastic'
+
+" ctrlp快速搜索文件并打开
+"Plug 'kien/ctrlp.vim' " 有用，但是非高频使用注释掉
+
+" vimcdoc中文vim文档
+Plug 'yianwillis/vimcdoc'
 
 " --------------------------------------------------------}}}2
 " 延迟按需加载，使用到命令的时候再加载的插件
@@ -206,14 +210,12 @@ call plug#end()
 " --------------------------------------------------------{{{2
 " 设置vim文字和背景颜色
 
-" 配色主题的色系设置为dark
-"set   background=dark
-"colorscheme solarized
-
-" 配色主题的色系设置为light
-"set   background=light
-"colorscheme solarized
-
+let g:solarized_termcolors=256
+if has('gui_running')
+	set background=light " 配色主题的色系设置为light
+	"set background=dark  " 配色主题的色系设置为dark
+endif
+colorscheme solarized
 
 " --------------------------------------------------------}}}2
 " 配置airline，美化状态栏和顶部tab
@@ -223,17 +225,17 @@ call plug#end()
 let g:airline_theme='term_light'  " airline配色
 let g:airline#extensions#tabline#enabled = 1 "顶部tab显示"
 let g:airline#extensions#tabline#buffer_nr_show = 1
+
+"unicode symbols
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-
-"unicode symbols
-let g:airline_left_sep = '▶'
-let g:airline_left_alt_sep = '❯'
-let g:airline_right_sep = '◀'
-let g:airline_right_alt_sep = '❮'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
+"let g:airline_left_sep = '▶'
+"let g:airline_left_alt_sep = '❯'
+"let g:airline_right_sep = '◀'
+"let g:airline_right_alt_sep = '❮'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
 
 " --------------------------------------------------------}}}2
 " 配置cscope
@@ -253,6 +255,11 @@ endif
 " --------------------------------------------------------{{{2
 " 添加tags文件(以便使用代码跳转和补全)
 "set tags+=/usr/include/tags
+"autocmd FileType c setlocal tags+=~/.cache/tags/libc.tags
+"autocmd FileType cpp setlocal tags+=~/.cache/tags/libc.tags
+"autocmd FileType cpp setlocal tags+=~/.cache/tags/libcxx.tags
+"autocmd FileType go setlocal tags+=~/.cache/tags/go.tags
+"autocmd FileType go setlocal tags+=~/.cache/tags/data-wanghan-work-aosp-j6b2r-build-soong-.tags
 set tags+=./.tags;,.tags
 
 " --------------------------------------------------------}}}2
@@ -370,9 +377,9 @@ let g:rainbow_conf = {
 " --------------------------------------------------------}}}2
 " 配置OmniCppComplete插件
 " --------------------------------------------------------{{{2
-let g:OmniCpp_DefaultNamespaces=["std"]
-let g:OmniCpp_MayCompleteScope=1
-let g:OmniCpp_SelectFirstItem=2
+"let g:OmniCpp_DefaultNamespaces=["std"]
+"let g:OmniCpp_MayCompleteScope=1
+"let g:OmniCpp_SelectFirstItem=2
 " 生成标签文件命令
 " 	ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .
 " 在对C++文件进行补全时，OmniCppComplete插件需要tag文件中包含C++的额外信息，因此上面的ctags命令不同于以前我们所使用的，它专门为C++语言生成一些额外的信息，上述选项的含义如下：
@@ -514,14 +521,14 @@ set completeopt-=preview
 " --------------------------------------------------------}}}2
 " 配置synatastic 语法检查设置
 " --------------------------------------------------------{{{2
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
 
 " --------------------------------------------------------}}}2
