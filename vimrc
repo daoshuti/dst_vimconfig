@@ -133,6 +133,7 @@ Plug 'altercation/vim-colors-solarized'
 
 " airline 状态栏插件
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " 代码自动补全插件
 Plug 'Shougo/neocomplete.vim'
@@ -212,6 +213,27 @@ call plug#end()
 " 配色主题的色系设置为light
 "set   background=light
 "colorscheme solarized
+
+
+" --------------------------------------------------------}}}2
+" 配置airline，美化状态栏和顶部tab
+" --------------------------------------------------------{{{2
+
+" ~/.vim/plugged/vim-airline-themes/autoload/airline/路径下可以查看配色
+let g:airline_theme='term_light'  " airline配色
+let g:airline#extensions#tabline#enabled = 1 "顶部tab显示"
+let g:airline#extensions#tabline#buffer_nr_show = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+"unicode symbols
+let g:airline_left_sep = '▶'
+let g:airline_left_alt_sep = '❯'
+let g:airline_right_sep = '◀'
+let g:airline_right_alt_sep = '❮'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
 
 " --------------------------------------------------------}}}2
 " 配置cscope
