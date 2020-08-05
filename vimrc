@@ -3,8 +3,10 @@
 " Email:  daoshuti@163.com
 " Github: https://github.com/daoshuti/dst_vimconfig
 " ========================================================
+
 " GENERAL SETTINGS:
 " 通用设置:
+
 " ========================================================{{{1
 
 " To use VIM settings, out of VI compatible mode.
@@ -90,8 +92,10 @@ if has("gui_running")
 endif
 
 " ========================================================}}}1
+
 " PLUGINS MANAGE:
 " 插件管理:
+
 " ========================================================{{{1
 
 " 指定插件所在目录
@@ -138,6 +142,9 @@ Plug 'jiangmiao/auto-pairs'
 " vim中的git插件
 Plug 'tpope/vim-fugitive'
 
+" markdown
+Plug 'plasticboy/vim-markdown'
+
 " AutoComplPop 是按字典进行补全的，只有你输入过的单词才可以补全
 " 默认只有输入两个字符，才会提示
 " vim输入时自动补全提示 比较古老，暂无好的替代品
@@ -145,9 +152,6 @@ Plug 'eikenb/acp'
 
 " ctags管理
 Plug 'ludovicchabant/vim-gutentags'
-
-" markdown
-Plug 'plasticboy/vim-markdown'
 
 " 代码自动补全插件
 Plug 'Shougo/neocomplete.vim'
@@ -158,26 +162,26 @@ Plug 'honza/vim-snippets'
 " C++代码补全，比较古老，不是很好用
 "Plug 'vim-scripts/OmniCppComplete'
 
-" Go Lang 插件
-Plug 'fatih/vim-go'
-
-" Python 插件
-Plug 'klen/python-mode'
-Plug 'yssource/python.vim'
-Plug 'vim-scripts/python_match.vim'
-Plug 'vim-scripts/pythoncomplete'
-
-" Disable if python support not present
-if !has('python') && !has('python3')
-	let g:pymode = 0
-endif
-
-if isdirectory(expand("~/.vim/bundle/python-mode"))
-	let g:pymode_lint_checkers = ['pyflakes']
-	let g:pymode_trim_whitespaces = 0
-	let g:pymode_options = 0
-	let g:pymode_rope = 0
-endif
+"" Go Lang 插件
+"Plug 'fatih/vim-go'
+"
+"" Python 插件
+"Plug 'klen/python-mode'
+"Plug 'yssource/python.vim'
+"Plug 'vim-scripts/python_match.vim'
+"Plug 'vim-scripts/pythoncomplete'
+"
+"" Disable if python support not present
+"if !has('python') && !has('python3')
+"	let g:pymode = 0
+"endif
+"
+"if isdirectory(expand("~/.vim/plugged/python-mode"))
+"	let g:pymode_lint_checkers = ['pyflakes']
+"	let g:pymode_trim_whitespaces = 0
+"	let g:pymode_options = 0
+"	let g:pymode_rope = 0
+"endif
 
 " vim 字典仓库
 "Plug 'asins/vim-dict'
@@ -204,6 +208,9 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " 代码速览插件(用tagbar替代了taglist)
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
+" 异步检查vim中的语法问题并提示
+Plug 'w0rp/ale', { 'on': 'ALEToggle' }
+
 " gocode go语言代码补全插件
 "Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
@@ -216,8 +223,10 @@ call plug#end()
 
 
 " ========================================================}}}1
+
 " SINGLE PLUGIN SETTINGS:
 " 每个插件的设置
+
 " ========================================================{{{1
 
 " background
@@ -247,6 +256,7 @@ let g:startify_custom_header = [
             \ '    | <F1> vim help 窗口           |',
             \ '    | <F2> tagbar   窗口           |',
             \ '    | <F3> 文件浏览 窗口           |',
+            \ '    | <F4> 语法检查                |',
             \ '    | <F6> 粘贴模式                |',
             \ '    | <F7> 代码折叠                |',
             \ '    | <F9> 生成tags                |',
@@ -597,8 +607,10 @@ source $VIMRUNTIME/ftplugin/man.vim
 " --------------------------------------------------------}}}2
 
 " ========================================================}}}1
+
 " VIM CUSTOM SHORTCUT KEY SETTINGS:
 " Vim自定义热键设置
+
 " ========================================================{{{1
 
 " Set mapleader
@@ -676,10 +688,10 @@ endfunction
 " --------------------------------------------------------}}}2
 " <Fx>类型快捷键总设置
 " --------------------------------------------------------{{{2
-" <F2> 左侧，Tlist 窗口
-" <F3> 右侧，文件浏览窗口
-" <F4> 下方，查看最近的浏览记录
-" <F5> CtrlP模式下刷新缓存（CtrlP插件自带）
+" <F2> vim help 窗口
+" <F2> tagbar   窗口
+" <F3> 文件浏览 窗口
+" <F4> 语法检查，并提示
 " <F6> 粘贴模式
 " <F7> 切换代码折叠方式（maker改为indent）
 " <F9> 生成tags数据库文件。之后就可以使用ctrl+] 和 ctrl+o(或者ctrl+t)
@@ -687,7 +699,7 @@ endfunction
 " <F12> 生成cscope.out数据库文件
 nmap  <F2> :TagbarToggle<cr>
 nmap  <F3> :NERDTreeToggle<cr>
-nmap  <F4> :MRU<cr>
+nmap  <F4> :ALEToggle<cr>
 nmap  <F6> :call F6_shell()<cr>
 nmap  <F7> :call F7_shell()<cr>
 nmap  <F9> :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>
@@ -745,8 +757,10 @@ nmap <leader>[ :tabp<cr>
 " --------------------------------------------------------}}}2
 
 " ========================================================}}}1
+
 " AUTO INSERT FILE HERDER:
 " 自动插入文件头:
+
 " ========================================================{{{1
 
 " 当打开*.c,*.cpp,*.sh,*.py,*.java文件时，执行SetTitle函数
