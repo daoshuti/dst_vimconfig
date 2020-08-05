@@ -101,6 +101,24 @@ endif
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
+
+" --------------------------------------------------------}}}2
+" UI插件
+" --------------------------------------------------------{{{2
+
+" vim start panel
+Plug 'mhinz/vim-startify'
+
+" vim theme
+Plug 'flazz/vim-colorschemes'
+
+" vim文字和背景配色
+Plug 'altercation/vim-colors-solarized'
+
+" airline 状态栏插件
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 " --------------------------------------------------------}}}2
 " 直接加载的插件
 " --------------------------------------------------------{{{2
@@ -117,6 +135,9 @@ Plug 'luochen1990/rainbow'
 " 输入时自动配对括号
 Plug 'jiangmiao/auto-pairs'
 
+" vim中的git插件
+Plug 'tpope/vim-fugitive'
+
 " AutoComplPop 是按字典进行补全的，只有你输入过的单词才可以补全
 " 默认只有输入两个字符，才会提示
 " vim输入时自动补全提示 比较古老，暂无好的替代品
@@ -127,13 +148,6 @@ Plug 'ludovicchabant/vim-gutentags'
 
 " markdown
 Plug 'plasticboy/vim-markdown'
-
-" vim文字和背景配色
-Plug 'altercation/vim-colors-solarized'
-
-" airline 状态栏插件
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 " 代码自动补全插件
 Plug 'Shougo/neocomplete.vim'
@@ -206,16 +220,51 @@ call plug#end()
 " 每个插件的设置
 " ========================================================{{{1
 
-" vim-colors-solarized插件
+" background
 " --------------------------------------------------------{{{2
-" 设置vim文字和背景颜色
-
-let g:solarized_termcolors=256
 if has('gui_running')
 	set background=light " 配色主题的色系设置为light
-	"set background=dark  " 配色主题的色系设置为dark
+else
+	set background=dark  " 配色主题的色系设置为dark
 endif
-colorscheme solarized
+"let g:solarized_termcolors=256
+
+" --------------------------------------------------------}}}2
+" vim startify
+" --------------------------------------------------------{{{2
+"自定义Header和Footer
+let g:startify_custom_header = [
+            \ '          __           __           ',
+            \ '         /\ \         /\ \__        ',
+            \ '         \_\ \    ____\ \ ,_\       ',
+            \ '         / _\ \  / ,__\\ \ \/       ',
+            \ '        /\ \L\ \/\__, `\\ \ \_      ',
+            \ '        \ \___,_\/\____/ \ \__\     ',
+            \ '         \/__,_ /\/___/   \/__/     ',
+            \ '    +------------------------------+',
+            \ '    |         DST vimconfig        |',
+            \ '    +------------------------------+',
+            \ '    | <F1> vim help 窗口           |',
+            \ '    | <F2> tagbar   窗口           |',
+            \ '    | <F3> 文件浏览 窗口           |',
+            \ '    | <F6> 粘贴模式                |',
+            \ '    | <F7> 代码折叠                |',
+            \ '    | <F9> 生成tags                |',
+            \ '    | <F12> 生成cscope.out         |',
+            \ '    +------------------------------+',
+            \]
+
+"let g:startify_custom_footer = [
+"            \ '+------------------------------+',
+"            \ '|          Keep Codeing        |',
+"            \ '+------------------------------+',
+"            \]
+
+" --------------------------------------------------------}}}2
+" vim-colors-solarized插件
+" --------------------------------------------------------{{{2
+" 开启solarized
+"colorscheme solarized
 
 " --------------------------------------------------------}}}2
 " 配置airline，美化状态栏和顶部tab
