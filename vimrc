@@ -156,7 +156,7 @@ Plug 'eikenb/acp'
 Plug 'ludovicchabant/vim-gutentags'
 
 " 代码自动补全插件
-Plug 'Shougo/neocomplete.vim'
+"Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'honza/vim-snippets'
@@ -494,6 +494,7 @@ let g:rainbow_conf = {
 " 配置neocomplete 补全插件，不支持Vim8.2以上，新版本推荐deoplete.nvim
 " --------------------------------------------------------{{{2
 
+if 0
 let g:acp_enableAtStartup = 0 " 禁用acp(AutoComplPop)
 let g:neocomplete#enable_at_startup = 1 " 打开neocomplete
 let g:neocomplete#enable_smart_case = 1 " 智能大小写
@@ -596,6 +597,7 @@ let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
 "autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 "autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+endif
 
 " --------------------------------------------------------}}}2
 " 配置snippets 设置
