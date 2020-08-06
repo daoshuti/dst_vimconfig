@@ -67,8 +67,6 @@ set noexpandtab     " 不把制表符替换为空格
 set shiftwidth=0    "换行时使用0个空格，使用tab键风格时如此设置
 "set shiftwidth=4    "换行时使用4个空格
 set termencoding=utf-8
-set whichwrap=h,l
-set wildignore=*.bak,*.o,*.e,*~
 set wildmenu
 set wildmode=list:longest,full
 set nowrap          " 禁止文字自动换行
@@ -236,7 +234,6 @@ if has('gui_running')
 else
 	set background=dark  " 配色主题的色系设置为dark
 endif
-"let g:solarized_termcolors=256
 
 " --------------------------------------------------------}}}2
 " vim startify
@@ -299,28 +296,33 @@ let g:startify_custom_header = [
 " vim-colors-solarized插件
 " --------------------------------------------------------{{{2
 " 开启solarized
-"colorscheme solarized
-colorscheme solarized8_dark_high
+let g:solarized_termcolors=256
+colorscheme solarized
 
 " --------------------------------------------------------}}}2
 " 配置airline，美化状态栏和顶部tab
 " --------------------------------------------------------{{{2
 
 " ~/.vim/plugged/vim-airline-themes/autoload/airline/路径下可以查看配色
-let g:airline_theme='term_light'  " airline配色
+"let g:airline_theme='solarized'   " airline配色
+"let g:airline_theme='term_light'  " airline配色
+"let g:airline_theme='biogoo'      " airline配色
+let g:airline_theme='powerlineish'
+
 let g:airline#extensions#tabline#enabled = 1 "顶部tab显示"
 let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#whitespace#enabled=0
 
-"unicode symbols
+let g:airline_powerline_fonts=0
 if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
+let g:airline_symbols = {}
 endif
-"let g:airline_left_sep = '▶'
-"let g:airline_left_alt_sep = '❯'
-"let g:airline_right_sep = '◀'
-"let g:airline_right_alt_sep = '❮'
-"let g:airline_symbols.linenr = '¶'
-"let g:airline_symbols.branch = '⎇'
+if !has("gui_running")
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = 'R'
+let g:airline_symbols.linenr = 'L:'
+let g:airline_symbols.maxlinenr = ' C'
+endif
 
 " --------------------------------------------------------}}}2
 " 配置cscope
