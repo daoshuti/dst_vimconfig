@@ -452,14 +452,21 @@ let g:rainbow_conf = {
             \	}
             \}
 
+
+" --------------------------------------------------------}}}2
+" 配置tagbar插件
+" --------------------------------------------------------{{{2
+let g:tagbar_position = 'left'
+let g:tagbar_autoclose = 1
+
 " --------------------------------------------------------}}}2
 " 配置NERDTree插件
 " --------------------------------------------------------{{{2
 "let Tlist_Show_One_File=1      " 打开文件时默认打开NERDTree
-"let g:NERDTreeWinPos="right"   " 在右侧打NERDTree
+let g:NERDTreeWinPos="right"   " 在右侧打NERDTree
 "let g:NERDTreeWinSize=25       " 宽度设置为25个字符
 "let g:NERDTreeShowLineNumbers=1" 显示行号
-"let g:NERDTreeQuitOnOpen=1     " 打开文件时关闭NERDTree
+let g:NERDTreeQuitOnOpen=1     " 打开文件时关闭NERDTree
 
 "--------------------------------------------------------}}}2
 " 配置CrtlP插件
@@ -743,15 +750,15 @@ endfunction
 " <F9> 生成tags数据库文件。之后就可以使用ctrl+] 和 ctrl+o(或者ctrl+t)
 " <F10> 以绝对路径在当前目录下，生成cscope数据库文件<目录名.out>
 " <F12> 生成cscope.out数据库文件
-nmap  <F2> :TagbarToggle<cr>
-nmap  <F3> :NERDTreeToggle<cr>
-nmap  <F4> :ALEToggle<cr>
-nmap  <F5> :terminal<cr>
-nmap  <F6> :call F6_shell()<cr>
-nmap  <F7> :call F7_shell()<cr>
-nmap  <F9> :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>
-"nmap <F10> :call RunShell("本地生成cscope文件", "bash ~/.vim/shell/create_cscope.sh")<cr>
-nmap <F12> :call RunShell("Generate cscope", "cscope -Rb")<cr>:cs add cscope.out<cr>
+nnoremap <silent> <F2> :TagbarToggle<CR>
+nnoremap <silent> <F3> :NERDTreeToggle<cr>
+nnoremap <silent> <F4> :ALEToggle<cr>
+nnoremap <silent> <F5> :terminal<cr>
+nnoremap <silent> <F6> :call F6_shell()<cr>
+nnoremap <silent> <F7> :call F7_shell()<cr>
+nnoremap <silent> <F9> :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>
+"nnoremap <silent> <F10> :call RunShell("本地生成cscope文件", "bash ~/.vim/shell/create_cscope.sh")<cr>
+nnoremap <silent> <F12> :call RunShell("Generate cscope", "cscope -Rb")<cr>:cs add cscope.out<cr>
 
 " --------------------------------------------------------}}}2
 "  cscope settings
