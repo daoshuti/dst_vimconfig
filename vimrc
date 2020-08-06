@@ -744,7 +744,7 @@ endfunction
 nmap  <F2> :TagbarToggle<cr>
 nmap  <F3> :NERDTreeToggle<cr>
 nmap  <F4> :ALEToggle<cr>
-nmap  <F5> :split Terminal<cr>:terminal<cr>
+nmap  <F5> :terminal<cr>
 nmap  <F6> :call F6_shell()<cr>
 nmap  <F7> :call F7_shell()<cr>
 nmap  <F9> :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>
