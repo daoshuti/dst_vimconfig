@@ -71,6 +71,7 @@ set wildmenu
 set wildmode=list:longest,full
 set nowrap          " 禁止文字自动换行
 "set textwidth=256   " 超过256个字符自动换行
+set t_Co=256        "开启256颜色
 set nobackup
 set noswapfile      " 不使用swapfile文件（不能灾难恢复）
 
