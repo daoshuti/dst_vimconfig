@@ -131,6 +131,9 @@ Plug 'vim-airline/vim-airline-themes'
 " 格式化对齐，代码中的等号
 "Plug 'junegunn/vim-easy-align' " 有趣，但是非高频使用，暂时注释掉
 
+" highlight current word
+Plug 'dominikduda/vim_current_word'
+
 " 彩虹括号
 Plug 'luochen1990/rainbow'
 
@@ -408,6 +411,16 @@ let g:gutentags_auto_add_gtags_cscope = 0
 "let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 "let g:markdown_syntax_conceal = 0 "关闭Markdown语法高亮
 "let g:markdown_minlines = 100 "支持100行显示（默认50行），开启后可能会卡
+
+" --------------------------------------------------------}}}2
+" 配置vim_current_word，自动高亮光标选中的单词
+" --------------------------------------------------------{{{2
+
+let g:vim_current_word#enabled = 1 "打开vim_current_word插件
+"let g:vim_current_word#highlight_twins = 1 "高亮相似的词
+let g:vim_current_word#highlight_current_word = 1 "高亮选中的单词
+"let g:vim_current_word#highlight_delay = 1000 "延时1000ms再highlight
+"let g:vim_current_word#highlight_only_in_focused_window = 1 "只高亮当前聚焦窗口
 
 " --------------------------------------------------------}}}2
 " 配置rainbow插件，显示彩色的括号
