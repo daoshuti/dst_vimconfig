@@ -257,6 +257,7 @@ endif
 "            \ '                    | <F2> tagbar   窗口           |',
 "            \ '                    | <F3> 文件浏览 窗口           |',
 "            \ '                    | <F4> 语法检查                |',
+"            \ '                    | <F5> 打开终端                |',
 "            \ '                    | <F6> 粘贴模式                |',
 "            \ '                    | <F7> 代码折叠                |',
 "            \ '                    | <F9> 生成tags                |',
@@ -283,6 +284,7 @@ let g:startify_custom_header = [
             \ '                        | <F2> tagbar   窗口           |',
             \ '                        | <F3> 文件浏览 窗口           |',
             \ '                        | <F4> 语法检查                |',
+            \ '                        | <F5> 打开终端                |',
             \ '                        | <F6> 粘贴模式                |',
             \ '                        | <F7> 代码折叠                |',
             \ '                        | <F9> 生成tags                |',
@@ -314,7 +316,7 @@ colorscheme solarized
 let g:airline_theme='powerlineish'
 
 let g:airline#extensions#tabline#enabled = 1 "顶部tab显示"
-let g:airline#extensions#tabline#buffer_nr_show = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#enabled=0
 
 let g:airline_powerline_fonts=0
@@ -742,6 +744,7 @@ endfunction
 nmap  <F2> :TagbarToggle<cr>
 nmap  <F3> :NERDTreeToggle<cr>
 nmap  <F4> :ALEToggle<cr>
+nmap  <F5> :split Terminal<cr>:terminal<cr>
 nmap  <F6> :call F6_shell()<cr>
 nmap  <F7> :call F7_shell()<cr>
 nmap  <F9> :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>
