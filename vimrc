@@ -113,7 +113,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'mhinz/vim-startify'
 
 " vim theme
-Plug 'flazz/vim-colorschemes'
+"Plug 'flazz/vim-colorschemes'
 
 " vim文字和背景配色
 Plug 'altercation/vim-colors-solarized'
@@ -458,6 +458,7 @@ let g:rainbow_conf = {
 " --------------------------------------------------------{{{2
 let g:tagbar_left = 1
 let g:tagbar_autoclose = 1
+let g:tagbar_sort = 0
 
 " --------------------------------------------------------}}}2
 " 配置NERDTree插件
