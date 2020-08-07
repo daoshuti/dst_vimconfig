@@ -147,8 +147,11 @@ Plug 't9md/vim-choosewin'
 " vim中的git插件
 Plug 'tpope/vim-fugitive'
 
+" 搜索单词内部，如果也包含关键字则高亮
+Plug 'google/vim-searchindex'
+
 " markdown
-Plug 'plasticboy/vim-markdown'
+"Plug 'plasticboy/vim-markdown'
 
 " AutoComplPop 是按字典进行补全的，只有你输入过的单词才可以补全
 " 默认只有输入两个字符，才会提示
@@ -264,7 +267,8 @@ endif
 "            \ '                    | <F6> 粘贴模式                |',
 "            \ '                    | <F7> 代码折叠                |',
 "            \ '                    | <F9> 生成tags                |',
-"            \ '                    | <F12> 生成cscope.out         |',
+"            \ '                    | <F12>生成cscope.out          |',
+"            \ '                    |   -  切换panel和tab          |',
 "            \ '                    +------------------------------+',
 "            \]
 
@@ -291,7 +295,8 @@ let g:startify_custom_header = [
             \ '                        | <F6> 粘贴模式                |',
             \ '                        | <F7> 代码折叠                |',
             \ '                        | <F9> 生成tags                |',
-            \ '                        | <F12> 生成cscope.out         |',
+            \ '                        | <F12>生成cscope.out          |',
+            \ '                        |   -  切换panel和tab          |',
             \ '                        +------------------------------+',
             \]
 
