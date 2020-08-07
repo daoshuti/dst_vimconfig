@@ -141,6 +141,9 @@ Plug 'luochen1990/rainbow'
 " 输入时自动配对括号
 Plug 'jiangmiao/auto-pairs'
 
+" 窗口管理
+Plug 't9md/vim-choosewin'
+
 " vim中的git插件
 Plug 'tpope/vim-fugitive'
 
@@ -809,6 +812,26 @@ nmap <leader>c :tabnew<cr>
 nmap <leader>x :tabclose<cr>
 nmap <leader>] :tabn<cr>
 nmap <leader>[ :tabp<cr>
+
+" choosewin keymap
+"	| Key  | Action     | Description                   |
+"	| ---- | ---------- | ----------------------------- |
+"	| 0    | tab_first  | Select FIRST    tab           |
+"	| [    | tab_prev   | Select PREVIOUS tab           |
+"	| ]    | tab_next   | Select NEXT     tab           |
+"	| $    | tab_last   | Select LAST     tab           |
+"	| x    | tab_close  | Close current tab             |
+"	| ;    | win_land   | Navigate to current window    |
+"	| -    | previous   | Naviage to previous window    |
+"	| s    | swap       | Swap windows               #1 |
+"	| S    | swap_stay  | Swap windows but stay      #1 |
+"	| <CR> | win_land   | Navigate to current window    |
+"	|      | <NOP>      | Disable predefined keymap     |
+" invoke with '-'
+nmap  -  <Plug>(choosewin)
+" if you want to use overlay feature
+let g:choosewin_overlay_enable = 1
+
 " --------------------------------------------------------}}}2
 
 " ========================================================}}}1
