@@ -12,6 +12,11 @@
 " To use VIM settings, out of VI compatible mode.
 set nocompatible
 
+set encoding=utf-8      " 使用utf-8编码格式
+scriptencoding utf-8    " vim脚本使用 utf-8格式
+set fileencodings=utf-8 " 文件缓冲区，使用utf-8编码格式
+set termencoding=utf-8  " terminal使用utf-8编码格式
+
 " Set Dos Mode
 if has('win32') || has('win64')
     set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
@@ -27,54 +32,52 @@ filetype on
 filetype plugin indent on " 开启三个功能：文件类型检查、插件、缩进
 
 " Other settings.
-set autoindent		" 创建新行自动缩进
-set cindent			" 开启针对c文件的缩进
-set smartindent	    " 开启智能缩进，它不像cindent那样完美支持c文件的缩进，但对于未知类型文件的缩进，还是有帮助的
-set autoread		" 文件在Vim之外修改过，自动重新读入
+set autoindent          " 创建新行自动缩进
+set cindent             " 开启针对c文件的缩进
+set cinoptions=:0       " C程序中switch-case预计默认缩进0个字符
+set smartindent	        " 开启智能缩进，它不像cindent那样完美支持c文件的缩进，但对于未知类型文件的缩进，还是有帮助的
+set autoread            " 文件在Vim之外修改过，自动重新读入
 set autowrite
-set backspace=indent,eol,start
-set cinoptions=:0
-set cursorcolumn    "高亮光标所在屏幕列
-set cursorline      "高亮光标所在屏幕行
-set completeopt=longest,menuone
-set fileencodings=utf-8,gb2312,gbk,gb18030 " 使用utf-8或gbk等编码打开文件
-set fileformat=unix
-set foldenable
-set foldmethod=marker	" 代码折叠(标签折叠方式)
-"set foldmethod=indent	" 代码折叠（缩进折叠方式）
-"set foldmethod=syntax	" 代码折叠（语法折叠方式）
-set foldcolumn=0		" 每行前面有0个折叠标识列
-set helpheight=10
-set helplang=cn       " 帮助系统设置为中文
 set hidden
-set history=1000      " 历史记录保留1000条
-set hlsearch
-set ignorecase        " 检索时忽略大小写
-set incsearch
-set laststatus=2      " 指定何时显示状态行
-"                          " 0 永远没有
-"                          " 1 只有分割窗口时(默认值)
-"                          " 2 总是存在
-set mouse=a         " 可以使用鼠标
-set number          " 显示行号
+set fileformat=unix     " 文件格式设置为unix
+set backspace=indent,eol,start
+set cursorcolumn        " 高亮光标所在屏幕列
+set cursorline          " 高亮光标所在屏幕行
+set completeopt=longest,menuone
+set foldenable          " 开启折叠功能
+set foldmethod=marker   " 代码折叠(标签折叠方式)
+"set foldmethod=indent  " 代码折叠（缩进折叠方式）
+"set foldmethod=syntax  " 代码折叠（语法折叠方式）
+set foldcolumn=0        " 每行前面有0个折叠标识列
+set helpheight=10       " 帮助窗口高度
+set helplang=cn         " 帮助系统设置为中文
+set history=1000        " 历史记录保留1000条
+set ignorecase          " 检索时忽略大小写
+set incsearch           " highlight搜索结果
+set hlsearch            " 输入搜索命令时也会highlight
+set laststatus=2        " 指定何时显示状态行
+                        " 0 永远没有
+                        " 1 只有分割窗口时(默认值)
+                        " 2 总是存在
+set mouse=a             " 可以使用鼠标
+set number              " 显示行号
 set pumheight=10
-set ruler           "显示状态栏
-set scrolloff=5
+set ruler               " 显示状态栏
+set scrolloff=5         " 键盘上下滚动屏幕的最小临界行数
 set showcmd
 set smartcase
-set tabstop=4       " 制表符为4
-set noexpandtab     " 不把制表符替换为空格
-"set expandtab       " 制表符替换为空格
-set shiftwidth=0    "换行时使用0个空格，使用tab键风格时如此设置
-"set shiftwidth=4    "换行时使用4个空格
-set termencoding=utf-8
+set tabstop=4           " 制表符为4
+set noexpandtab         " 不把制表符替换为空格
+"set expandtab          " 制表符替换为空格
+set shiftwidth=0        "换行时使用0个空格，使用tab键风格时如此设置
+"set shiftwidth=4       "换行时使用4个空格
 set wildmenu
 set wildmode=list:longest,full
-set nowrap          " 禁止文字自动换行
-"set textwidth=256   " 超过256个字符自动换行
-set t_Co=256        "开启256颜色
-set nobackup
-set noswapfile      " 不使用swapfile文件（不能灾难恢复）
+set nowrap              " 禁止文字自动换行
+"set textwidth=256      " 超过256个字符自动换行
+set t_Co=256            " 开启256颜色
+set nobackup            " 取消备份
+set noswapfile          " 不使用swapfile文件（不能灾难恢复）
 
 " gui settings
 if has("gui_running")
@@ -171,29 +174,7 @@ Plug 'honza/vim-snippets'
 " C++代码补全，比较古老，不是很好用
 "Plug 'vim-scripts/OmniCppComplete'
 
-"" Go Lang 插件
-"Plug 'fatih/vim-go'
-"
-"" Python 插件
-"Plug 'klen/python-mode'
-"Plug 'yssource/python.vim'
-"Plug 'vim-scripts/python_match.vim'
-"Plug 'vim-scripts/pythoncomplete'
-"
-"" Disable if python support not present
-"if !has('python') && !has('python3')
-"	let g:pymode = 0
-"endif
-"
-"if isdirectory(expand("~/.vim/plugged/python-mode"))
-"	let g:pymode_lint_checkers = ['pyflakes']
-"	let g:pymode_trim_whitespaces = 0
-"	let g:pymode_options = 0
-"	let g:pymode_rope = 0
-"endif
-
 " vim 字典仓库
-"Plug 'asins/vim-dict'
 Plug 'skywind3000/vim-dict'
 
 " 语法检查，需配合相应的语法检查器
@@ -271,10 +252,10 @@ if isdirectory(expand("~/.vim/plugged/vim-startify/"))
 				\]
 
 	"let g:startify_custom_footer = [
-	"            \ '+------------------------------+',
-	"            \ '|          Keep Codeing        |',
-	"            \ '+------------------------------+',
-	"            \]
+	"			\ '+------------------------------+',
+	"			\ '|          Keep Codeing        |',
+	"			\ '+------------------------------+',
+	"			\]
 endif
 
 " --------------------------------------------------------}}}2
@@ -325,13 +306,13 @@ endif
 " 配置cscope
 " --------------------------------------------------------{{{2
 if has("cscope")
-    set csto=1
-    set cst
-    set nocsverb
-    if filereadable("cscope.out")
-        cs add cscope.out
-    endif
-    set csverb
+	set csto=1
+	set cst
+	set nocsverb
+	if filereadable("cscope.out")
+		cs add cscope.out
+	endif
+	set csverb
 endif
 
 " --------------------------------------------------------}}}2
@@ -632,9 +613,9 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 
 " For snippet_complete marker.
 if !exists("g:spf13_no_conceal")
-    if has('conceal')
-        set conceallevel=2 concealcursor=i
-    endif
+	if has('conceal')
+		set conceallevel=2 concealcursor=i
+	endif
 endif
 
 " Enable neosnippets when using go
@@ -714,23 +695,23 @@ endfunction
 let s:f6_flag=0
 let s:f7_flag=0
 function F6_shell()
-    if (s:f6_flag == 0)
-        set paste
-        set nonumber
-        if (s:f7_flag == 1)
-            set foldcolumn=0
-            set foldmethod=marker
-        endif
-        let s:f6_flag=1
-    else
-        set nopaste
-        set number
-        if (s:f7_flag == 1)
-            set foldcolumn=5
-            set foldmethod=indent
-        endif
-        let s:f6_flag=0
-    endif
+	if (s:f6_flag == 0)
+		set paste
+		set nonumber
+		if (s:f7_flag == 1)
+			set foldcolumn=0
+			set foldmethod=marker
+		endif
+		let s:f6_flag=1
+	else
+		set nopaste
+		set number
+		if (s:f7_flag == 1)
+			set foldcolumn=5
+			set foldmethod=indent
+		endif
+		let s:f6_flag=0
+	endif
 endfunction
 
 
@@ -738,15 +719,15 @@ endfunction
 " <F7>快捷键依赖的运行vimscript脚本的函数
 " --------------------------------------------------------{{{2
 function F7_shell()
-    if (s:f7_flag == 0)
-        set foldcolumn=5
-        set foldmethod=indent
-        let s:f7_flag=1
-    else
-        set foldcolumn=0
-        set foldmethod=marker
-        let s:f7_flag=0
-    endif
+	if (s:f7_flag == 0)
+		set foldcolumn=5
+		set foldmethod=indent
+		let s:f7_flag=1
+	else
+		set foldcolumn=0
+		set foldmethod=marker
+		let s:f7_flag=0
+	endif
 endfunction
 
 " --------------------------------------------------------}}}2
@@ -849,52 +830,52 @@ let g:choosewin_overlay_enable = 1
 " ========================================================{{{1
 
 " 当打开*.c,*.cpp,*.sh,*.py,*.java文件时，执行SetTitle函数
-autocmd BufNewFile *.c,*.cpp,*.sh,*.py,*.java exec ":call SetTitle()"                                                                                       
+autocmd BufNewFile *.c,*.cpp,*.sh,*.py,*.java exec ":call SetTitle()"
 
 "定义函数SetTitle，自动插入文件头
 func SetTitle()
-    "如果文件类型为.c或者.cpp文件
-    if (&filetype == 'c' || &filetype == 'cpp')
-        call setline(1, "/*************************************************************************")
-        call setline(2, "\ @Author: wanghan")
-        call setline(3, "\ @Created Time : ".strftime("%c"))
-        call setline(4, "\ @File Name: ".expand("%"))
-        call setline(5, "\ @Description:")
-        call setline(6, " ************************************************************************/")
-        call setline(7,"")
-    endif
-    "如果文件类型为.sh文件
-    if &filetype == 'sh'
-        call setline(1, "\#!/bin/bash")
-        call setline(2, "\# Author: wanghan")
-        call setline(3, "\# Created Time : ".strftime("%c"))
-        call setline(4, "\# File Name: ".expand("%"))
-        call setline(5, "\# Description:")
-        call setline(6,"")
-    endif
-    "如果文件类型为.py文件
-    if &filetype == 'python'
-        call setline(1, "\#!/usr/bin/env python")
-        call setline(2, "\# -*- coding=utf8 -*-")
-        call setline(3, "\"\"\"")
-        call setline(4, "\# Author: wanghan")
-        call setline(5, "\# Created Time : ".strftime("%c"))
-        call setline(6, "\# File Name: ".expand("%"))
-        call setline(7, "\# Description:")
-        call setline(8, "\"\"\"")
-        call setline(9,"")
-    endif
-    "如果文件类型为.java文件
-    if &filetype == 'java'
-        call setline(1, "//coding=utf8")
-        call setline(2, "/**")
-        call setline(3, "\ *\ @Author: wanghan")
-        call setline(4, "\ *\ @Created Time : ".strftime("%c"))
-        call setline(5, "\ *\ @File Name: ".expand("%"))
-        call setline(6, "\ *\ @Description:")
-        call setline(7, "\ */")
-        call setline(8,"")
-    endif
+	"如果文件类型为.c或者.cpp文件
+	if (&filetype == 'c' || &filetype == 'cpp')
+		call setline(1, "/*************************************************************************")
+		call setline(2, "\ @Author: wanghan")
+		call setline(3, "\ @Created Time : ".strftime("%c"))
+		call setline(4, "\ @File Name: ".expand("%"))
+		call setline(5, "\ @Description:")
+		call setline(6, " ************************************************************************/")
+		call setline(7,"")
+	endif
+	"如果文件类型为.sh文件
+	if &filetype == 'sh'
+		call setline(1, "\#!/bin/bash")
+		call setline(2, "\# Author: wanghan")
+		call setline(3, "\# Created Time : ".strftime("%c"))
+		call setline(4, "\# File Name: ".expand("%"))
+		call setline(5, "\# Description:")
+		call setline(6,"")
+	endif
+	"如果文件类型为.py文件
+	if &filetype == 'python'
+		call setline(1, "\#!/usr/bin/env python")
+		call setline(2, "\# -*- coding=utf8 -*-")
+		call setline(3, "\"\"\"")
+		call setline(4, "\# Author: wanghan")
+		call setline(5, "\# Created Time : ".strftime("%c"))
+		call setline(6, "\# File Name: ".expand("%"))
+		call setline(7, "\# Description:")
+		call setline(8, "\"\"\"")
+		call setline(9,"")
+	endif
+	"如果文件类型为.java文件
+	if &filetype == 'java'
+		call setline(1, "//coding=utf8")
+		call setline(2, "/**")
+		call setline(3, "\ *\ @Author: wanghan")
+		call setline(4, "\ *\ @Created Time : ".strftime("%c"))
+		call setline(5, "\ *\ @File Name: ".expand("%"))
+		call setline(6, "\ *\ @Description:")
+		call setline(7, "\ */")
+		call setline(8,"")
+	endif
 endfunc
 
 " 自动将光标定位到末尾
