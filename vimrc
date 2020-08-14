@@ -241,100 +241,84 @@ call plug#end()
 " --------------------------------------------------------}}}2
 " vim startify
 " --------------------------------------------------------{{{2
-"自定义Header和Footer
-"let g:startify_custom_header = [
-"            \ '    .___        __          .__                             _____.__        ',
-"            \ '  __| _/_______/  |_  ___  _|__| _____   ____  ____   _____/ ____\__| ____  ',
-"            \ ' / __ |/  ___/\   __\ \  \/ /  |/     \_/ ___\/  _ \ /    \   __\|  |/ ___\ ',
-"            \ '/ /_/ |\___ \  |  |    \   /|  |  Y Y  \  \__(  <_> )   |  \  |  |  / /_/  >',
-"            \ '\____ /____  > |__|     \_/ |__|__|_|  /\___  >____/|___|  /__|  |__\___  / ',
-"            \ '     \/    \/                        \/     \/           \/        /_____/  ',
-"            \ '                    +------------------------------+',
-"            \ '                    |         dst vimconfig        |',
-"            \ '                    +------------------------------+',
-"            \ '                    | <F1> vim help 窗口           |',
-"            \ '                    | <F2> tagbar   窗口           |',
-"            \ '                    | <F3> 文件浏览 窗口           |',
-"            \ '                    | <F4> 语法检查                |',
-"            \ '                    | <F5> 打开终端                |',
-"            \ '                    | <F6> 粘贴模式                |',
-"            \ '                    | <F7> 代码折叠                |',
-"            \ '                    | <F9> 生成tags                |',
-"            \ '                    | <F12>生成cscope.out          |',
-"            \ '                    |   -  切换panel和tab          |',
-"            \ '                    +------------------------------+',
-"            \]
+if isdirectory(expand("~/.vim/plugged/vim-startify/"))
 
-"http://patorjk.com/software/taag
+	"http://patorjk.com/software/taag
+	let g:startify_custom_header = [
+				\ '  __           __                                                           ___                 ',
+				\ ' /\ \         /\ \__               __                                     / ___\ __             ',
+				\ ' \_\ \    ____\ \ ,_\      __  __ /\_\    ___ ___     ___    ___     ___ /\ \__//\_\     __     ',
+				\ ' / _\ \  / ,__\\ \ \/     /\ \/\ \\/\ \ /  __` __`\  / ___\ / __`\ /  _ `\ \ ,__\/\ \  / _ `\   ',
+				\ '/\ \L\ \/\__, `\\ \ \_    \ \ \_/ |\ \ \/\ \/\ \/\ \/\ \__//\ \L\ \/\ \/\ \ \ \_/\ \ \/\ \L\ \  ',
+				\ '\ \___,_\/\____/ \ \__\    \ \___/  \ \_\ \_\ \_\ \_\ \____\ \____/\ \_\ \_\ \_\  \ \_\ \____ \ ',
+				\ ' \/__,_ /\/___/   \/__/     \/__/    \/_/\/_/\/_/\/_/\/____/\/___/  \/_/\/_/\/_/   \/_/\/___L\ \',
+				\ '                                                                                         /\____/',
+				\ '                                                                                         \_/__/ ',
+				\ '                        +------------------------------+',
+				\ '                        |         dst vimconfig        |',
+				\ '                        +------------------------------+',
+				\ '                        | <F1> vim help 窗口           |',
+				\ '                        | <F2> tagbar   窗口           |',
+				\ '                        | <F3> 文件浏览 窗口           |',
+				\ '                        | <F4> 语法检查                |',
+				\ '                        | <F5> 打开终端                |',
+				\ '                        | <F6> 粘贴模式                |',
+				\ '                        | <F7> 代码折叠                |',
+				\ '                        | <F9> 生成tags                |',
+				\ '                        | <F12>生成cscope.out          |',
+				\ '                        |   -  切换panel和tab          |',
+				\ '                        +------------------------------+',
+				\]
 
-let g:startify_custom_header = [
-            \ '  __           __                                                           ___                 ',
-            \ ' /\ \         /\ \__               __                                     / ___\ __             ',
-            \ ' \_\ \    ____\ \ ,_\      __  __ /\_\    ___ ___     ___    ___     ___ /\ \__//\_\     __     ',
-            \ ' / _\ \  / ,__\\ \ \/     /\ \/\ \\/\ \ /  __` __`\  / ___\ / __`\ /  _ `\ \ ,__\/\ \  / _ `\   ',
-            \ '/\ \L\ \/\__, `\\ \ \_    \ \ \_/ |\ \ \/\ \/\ \/\ \/\ \__//\ \L\ \/\ \/\ \ \ \_/\ \ \/\ \L\ \  ',
-            \ '\ \___,_\/\____/ \ \__\    \ \___/  \ \_\ \_\ \_\ \_\ \____\ \____/\ \_\ \_\ \_\  \ \_\ \____ \ ',
-            \ ' \/__,_ /\/___/   \/__/     \/__/    \/_/\/_/\/_/\/_/\/____/\/___/  \/_/\/_/\/_/   \/_/\/___L\ \',
-            \ '                                                                                         /\____/',
-            \ '                                                                                         \_/__/ ',
-            \ '                        +------------------------------+',
-            \ '                        |         dst vimconfig        |',
-            \ '                        +------------------------------+',
-            \ '                        | <F1> vim help 窗口           |',
-            \ '                        | <F2> tagbar   窗口           |',
-            \ '                        | <F3> 文件浏览 窗口           |',
-            \ '                        | <F4> 语法检查                |',
-            \ '                        | <F5> 打开终端                |',
-            \ '                        | <F6> 粘贴模式                |',
-            \ '                        | <F7> 代码折叠                |',
-            \ '                        | <F9> 生成tags                |',
-            \ '                        | <F12>生成cscope.out          |',
-            \ '                        |   -  切换panel和tab          |',
-            \ '                        +------------------------------+',
-            \]
-
-"let g:startify_custom_footer = [
-"            \ '+------------------------------+',
-"            \ '|          Keep Codeing        |',
-"            \ '+------------------------------+',
-"            \]
+	"let g:startify_custom_footer = [
+	"            \ '+------------------------------+',
+	"            \ '|          Keep Codeing        |',
+	"            \ '+------------------------------+',
+	"            \]
+endif
 
 " --------------------------------------------------------}}}2
 " vim-colors-solarized插件
 " --------------------------------------------------------{{{2
-"if has('gui_running')
-"	set background=light " 配色主题的色系设置为light
-"else
-"	set background=dark  " 配色主题的色系设置为dark
-"endif
-set background=dark
-" 开启solarized
-let g:solarized_termcolors=256
-colorscheme solarized
+if isdirectory(expand("~/.vim/plugged/vim-colors-solarized/"))
+	"if has('gui_running')
+	"	set background=light " 配色主题的色系设置为light
+	"else
+	"	set background=dark  " 配色主题的色系设置为dark
+	"endif
+	set background=dark
+	" 开启solarized
+	let g:solarized_termcolors=256
+	colorscheme solarized
+endif
 
 " --------------------------------------------------------}}}2
 " 配置airline，美化状态栏和顶部tab
 " --------------------------------------------------------{{{2
 
-" ~/.vim/plugged/vim-airline-themes/autoload/airline/路径下可以查看配色
-"let g:airline_theme='solarized'   " airline配色
-"let g:airline_theme='term_light'  " airline配色
-"let g:airline_theme='biogoo'      " airline配色
-let g:airline_theme='powerlineish'
+if isdirectory(expand("~/.vim/plugged/vim-airline/"))
+	if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
+		" ~/.vim/plugged/vim-airline-themes/autoload/airline/路径下可以查看配色
+		"let g:airline_theme='solarized'   " airline配色
+		"let g:airline_theme='term_light'  " airline配色
+		"let g:airline_theme='biogoo'      " airline配色
+		let g:airline_theme='powerlineish'
+	endif
 
-let g:airline#extensions#tabline#enabled = 1 "顶部tab显示"
-"let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#whitespace#enabled=0
+	let g:airline#extensions#tabline#enabled = 1 "顶部tab显示"
+	"let g:airline#extensions#tabline#buffer_nr_show = 1
+	let g:airline#extensions#whitespace#enabled=0
 
-let g:airline_powerline_fonts=0
-if !exists('g:airline_symbols')
-let g:airline_symbols = {}
-endif
-if !has("gui_running")
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = 'R'
-let g:airline_symbols.linenr = 'L:'
-let g:airline_symbols.maxlinenr = ' C'
+	let g:airline_powerline_fonts=0
+	if !exists('g:airline_symbols')
+		let g:airline_symbols = {}
+	endif
+	if !has("gui_running")
+		let g:airline_symbols.branch = ''
+		let g:airline_symbols.readonly = 'R'
+		let g:airline_symbols.linenr = 'L:'
+		let g:airline_symbols.maxlinenr = ' C'
+	endif
 endif
 
 " --------------------------------------------------------}}}2
@@ -365,40 +349,44 @@ set tags+=./.tags;,.tags
 " --------------------------------------------------------}}}2
 "  Gtags
 " --------------------------------------------------------{{{2
-"let $GTAGSLABEL = 'native-pygments'
-"let $GTAGSCONF = '/path/to/share/gtags/gtags.conf'
+if 0
+	let $GTAGSLABEL = 'native-pygments'
+	let $GTAGSCONF = '/path/to/share/gtags/gtags.conf'
+endif
 
 " --------------------------------------------------------}}}2
 " gutentags 插件设置
 " --------------------------------------------------------{{{2
-" gutentags 搜索工程目录的标志，当前文件路径向上递归直到碰到这些文件/目录名
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+if isdirectory(expand("~/.vim/plugged/vim-gutentags/"))
+	" gutentags 搜索工程目录的标志，当前文件路径向上递归直到碰到这些文件/目录名
+	let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 
-" 所生成的数据文件的名称
-let g:gutentags_ctags_tagfile = '.tags'
+	" 所生成的数据文件的名称
+	let g:gutentags_ctags_tagfile = '.tags'
 
-" 同时开启 ctags 和 gtags 支持：
-let g:gutentags_modules = []
-if executable('ctags')
-	let g:gutentags_modules += ['ctags']
+	" 同时开启 ctags 和 gtags 支持：
+	let g:gutentags_modules = []
+	if executable('ctags')
+		let g:gutentags_modules += ['ctags']
+	endif
+	if executable('gtags-cscope') && executable('gtags')
+		let g:gutentags_modules += ['gtags_cscope']
+	endif
+
+	" 将自动生成的 ctags/gtags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+	let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+	" 配置 ctags 的参数，老的 Exuberant-ctags 不能有 --extra=+q，注意
+	let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+	let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+	let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+	" 如果使用 universal ctags 需要增加下面一行，老的 Exuberant-ctags 不能加下一行
+	let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+
+	" 禁用 gutentags 自动加载 gtags 数据库的行为
+	let g:gutentags_auto_add_gtags_cscope = 0
 endif
-if executable('gtags-cscope') && executable('gtags')
-	let g:gutentags_modules += ['gtags_cscope']
-endif
-
-" 将自动生成的 ctags/gtags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-let g:gutentags_cache_dir = expand('~/.cache/tags')
-
-" 配置 ctags 的参数，老的 Exuberant-ctags 不能有 --extra=+q，注意
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-
-" 如果使用 universal ctags 需要增加下面一行，老的 Exuberant-ctags 不能加下一行
-let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
-
-" 禁用 gutentags 自动加载 gtags 数据库的行为
-let g:gutentags_auto_add_gtags_cscope = 0
 
 " --------------------------------------------------------}}}2
 " markdown 插件设置
@@ -414,209 +402,228 @@ let g:gutentags_auto_add_gtags_cscope = 0
 " zc: close a fold your cursor is on //关闭光标所在的折叠
 " zC: close a fold your cursor is on recursively //递归关闭光标所在的折叠
 
-"let g:vim_markdown_folding_disabled = 1 "禁用代码折叠
-"set [no]foldenable "vim自带的折叠功能是否开启
+"if isdirectory(expand("~/.vim/plugged/vim-markdown/"))
+if 0
+	let g:vim_markdown_folding_disabled = 1 "禁用代码折叠
+	set [no]foldenable "vim自带的折叠功能是否开启
 
-"autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-"let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-"let g:markdown_syntax_conceal = 0 "关闭Markdown语法高亮
-"let g:markdown_minlines = 100 "支持100行显示（默认50行），开启后可能会卡
+	autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+	let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+	let g:markdown_syntax_conceal = 0 "关闭Markdown语法高亮
+	let g:markdown_minlines = 100 "支持100行显示（默认50行），开启后可能会卡
+endif
 
 " --------------------------------------------------------}}}2
 " 配置vim_current_word，自动高亮光标选中的单词
 " --------------------------------------------------------{{{2
 
-let g:vim_current_word#enabled = 1 "打开vim_current_word插件
-"let g:vim_current_word#highlight_twins = 1 "高亮相似的词
-let g:vim_current_word#highlight_current_word = 1 "高亮选中的单词
-"let g:vim_current_word#highlight_delay = 1000 "延时1000ms再highlight
-"let g:vim_current_word#highlight_only_in_focused_window = 1 "只高亮当前聚焦窗口
+if isdirectory(expand("~/.vim/plugged/vim_current_word/"))
+	let g:vim_current_word#enabled = 1 "打开vim_current_word插件
+	"let g:vim_current_word#highlight_twins = 1 "高亮相似的词
+	let g:vim_current_word#highlight_current_word = 1 "高亮选中的单词
+	"let g:vim_current_word#highlight_delay = 1000 "延时1000ms再highlight
+	"let g:vim_current_word#highlight_only_in_focused_window = 1 "只高亮当前聚焦窗口
+endif
 
 " --------------------------------------------------------}}}2
 " 配置rainbow插件，显示彩色的括号
 " --------------------------------------------------------{{{2
-let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
-let g:rainbow_conf = {
-            \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-            \	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-            \	'operators': '_,_',
-            \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-            \	'separately': {
-            \		'*': {},
-            \		'tex': {
-            \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-            \		},
-            \		'lisp': {
-            \			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-            \		},
-            \		'vim': {
-            \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-            \		},
-            \		'html': {
-            \			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-            \		},
-            \		'css': 0,
-            \	}
-            \}
-
+if isdirectory(expand("~/.vim/plugged/rainbow/"))
+	let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+	let g:rainbow_conf = {
+				\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+				\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+				\	'operators': '_,_',
+				\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+				\	'separately': {
+				\		'*': {},
+				\		'tex': {
+				\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+				\		},
+				\		'lisp': {
+				\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+				\		},
+				\		'vim': {
+				\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+				\		},
+				\		'html': {
+				\			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+				\		},
+				\		'css': 0,
+				\	}
+				\}
+endif
 
 " --------------------------------------------------------}}}2
 " 配置tagbar插件
 " --------------------------------------------------------{{{2
-let g:tagbar_left = 1
-let g:tagbar_autoclose = 1
-let g:tagbar_sort = 0
+if isdirectory(expand("~/.vim/plugged/tagbar/"))
+	let g:tagbar_left = 1
+	let g:tagbar_autoclose = 1
+	let g:tagbar_sort = 0
+endif
 
 " --------------------------------------------------------}}}2
 " 配置NERDTree插件
 " --------------------------------------------------------{{{2
-"let Tlist_Show_One_File=1      " 打开文件时默认打开NERDTree
-let g:NERDTreeWinPos="right"   " 在右侧打NERDTree
-"let g:NERDTreeWinSize=25       " 宽度设置为25个字符
-"let g:NERDTreeShowLineNumbers=1" 显示行号
-let g:NERDTreeQuitOnOpen=1     " 打开文件时关闭NERDTree
+if isdirectory(expand("~/.vim/plugged/nerdtree/"))
+	"let Tlist_Show_One_File=1      " 打开文件时默认打开NERDTree
+	let g:NERDTreeWinPos="right"   " 在右侧打NERDTree
+	"let g:NERDTreeWinSize=25       " 宽度设置为25个字符
+	"let g:NERDTreeShowLineNumbers=1" 显示行号
+	let g:NERDTreeQuitOnOpen=1     " 打开文件时关闭NERDTree
+endif
 
 "--------------------------------------------------------}}}2
 " 配置CrtlP插件
 " --------------------------------------------------------{{{2
-"let g:ctrlp_map = '<c-p>'
-"let g:ctrlp_cmd = 'CtrlP'
-"
-"set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-"set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-"
-"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-"let g:ctrlp_custom_ignore = {
-"  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-"  \ 'file': '\v\.(exe|so|dll)$',
-"  \ 'link': 'some_bad_symbolic_links',
-"  \ }
+"if isdirectory(expand("~/.vim/plugged/ctrlp.vim"))
+if 0
+	let g:ctrlp_map = '<c-p>'
+	let g:ctrlp_cmd = 'CtrlP'
+
+	set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+	set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+	let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+	let g:ctrlp_custom_ignore = {
+				\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+				\ 'file': '\v\.(exe|so|dll)$',
+				\ 'link': 'some_bad_symbolic_links',
+				\ }
+endif
 
 " --------------------------------------------------------}}}2
 " 配置OmniCppComplete插件
 " --------------------------------------------------------{{{2
-"let g:OmniCpp_DefaultNamespaces=["std"]
-"let g:OmniCpp_MayCompleteScope=1
-"let g:OmniCpp_SelectFirstItem=2
 " 生成标签文件命令
 " 	ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .
 " 在对C++文件进行补全时，OmniCppComplete插件需要tag文件中包含C++的额外信息，因此上面的ctags命令不同于以前我们所使用的，它专门为C++语言生成一些额外的信息，上述选项的含义如下：
 " 	--c++-kinds=+p : 为C++文件增加函数原型的标签
 " 	--fields=+iaS : 在标签文件中加入继承信息(i)、类成员的访问控制信息(a)、以及函数的指纹(S)
 " 	--extra=+q : 为标签增加类修饰符。注意，如果没有此选项，将不能对类成员补全
+"if isdirectory(expand("~/.vim/plugged/OmniCppComplete'"))
+if 0
+	let g:OmniCpp_DefaultNamespaces=["std"]
+	let g:OmniCpp_MayCompleteScope=1
+	let g:OmniCpp_SelectFirstItem=2
+endif
 
 " --------------------------------------------------------}}}2
 " 配置neocomplete 补全插件，不支持Vim8.2以上，新版本推荐deoplete.nvim
 " --------------------------------------------------------{{{2
 
+
+"if isdirectory(expand("~/.vim/plugged/neocomplete.vim/"))
 if 0
-let g:acp_enableAtStartup = 0 " 禁用acp(AutoComplPop)
-let g:neocomplete#enable_at_startup = 1 " 打开neocomplete
-let g:neocomplete#enable_smart_case = 1 " 智能大小写
-let g:neocomplete#enable_auto_delimiter = 1 " 自动分隔符
-let g:neocomplete#max_list = 15 " 下拉菜单最多15行
-let g:neocomplete#force_overwrite_completefunc = 1 " 强制覆盖completefunc
+	let g:acp_enableAtStartup = 0 " 禁用acp(AutoComplPop)
+	let g:neocomplete#enable_at_startup = 1 " 打开neocomplete
+	let g:neocomplete#enable_smart_case = 1 " 智能大小写
+	let g:neocomplete#enable_auto_delimiter = 1 " 自动分隔符
+	let g:neocomplete#max_list = 15 " 下拉菜单最多15行
+	let g:neocomplete#force_overwrite_completefunc = 1 " 强制覆盖completefunc
 
-" Define dictionary. 定义字典
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-    \ }
+	" Define dictionary. 定义字典
+	let g:neocomplete#sources#dictionary#dictionaries = {
+				\ 'default' : '',
+				\ 'vimshell' : $HOME.'/.vimshell_hist',
+				\ 'scheme' : $HOME.'/.gosh_completions'
+				\ }
 
-" Define keyword. 定义关键字
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+	" Define keyword. 定义关键字
+	if !exists('g:neocomplete#keyword_patterns')
+		let g:neocomplete#keyword_patterns = {}
+	endif
+	let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" complete-key-map-setting 
-" --------------------------------------------------------
-" <C-k> Complete Snippet
-" <C-k> Jump to next snippet point
-imap <silent><expr><C-k> neosnippet#expandable() ?
-            \ "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ?
-            \ "\<C-e>" : "\<Plug>(neosnippet_expand_or_jump)")
-smap <TAB> <Right><Plug>(neosnippet_jump_or_expand)
+	" complete-key-map-setting 
+	" --------------------------------------------------------
+	" <C-k> Complete Snippet
+	" <C-k> Jump to next snippet point
+	imap <silent><expr><C-k> neosnippet#expandable() ?
+				\ "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ?
+				\ "\<C-e>" : "\<Plug>(neosnippet_expand_or_jump)")
+	smap <TAB> <Right><Plug>(neosnippet_jump_or_expand)
 
-inoremap <expr><C-g> neocomplete#undo_completion()
-inoremap <expr><C-l> neocomplete#complete_common_string()
-"inoremap <expr><CR> neocomplete#complete_common_string()
+	inoremap <expr><C-g> neocomplete#undo_completion()
+	inoremap <expr><C-l> neocomplete#complete_common_string()
+	"inoremap <expr><CR> neocomplete#complete_common_string()
 
-" <CR>: close popup
-" <s-CR>: close popup and save indent.
-inoremap <expr><s-CR> pumvisible() ? neocomplete#smart_close_popup()."\<CR>" : "\<CR>"
+	" <CR>: close popup
+	" <s-CR>: close popup and save indent.
+	inoremap <expr><s-CR> pumvisible() ? neocomplete#smart_close_popup()."\<CR>" : "\<CR>"
 
-function! CleverCr()
-    if pumvisible()
-        if neosnippet#expandable()
-            let exp = "\<Plug>(neosnippet_expand)"
-            return exp . neocomplete#smart_close_popup()
-        else
-            return neocomplete#smart_close_popup()
-        endif
-    else
-        return "\<CR>"
-    endif
-endfunction
+	function! CleverCr()
+		if pumvisible()
+			if neosnippet#expandable()
+				let exp = "\<Plug>(neosnippet_expand)"
+				return exp . neocomplete#smart_close_popup()
+			else
+				return neocomplete#smart_close_popup()
+			endif
+		else
+			return "\<CR>"
+		endif
+	endfunction
 
-" <CR> close popup and save indent or expand snippet
-imap <expr> <CR> CleverCr()
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y> neocomplete#smart_close_popup()
-" <TAB>: completion.
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+	" <CR> close popup and save indent or expand snippet
+	imap <expr> <CR> CleverCr()
+	" <C-h>, <BS>: close popup and delete backword char.
+	inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+	inoremap <expr><C-y> neocomplete#smart_close_popup()
+	" <TAB>: completion.
+	inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+	inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
-" Courtesy of Matteo Cavalleri
+	" Courtesy of Matteo Cavalleri
 
-function! CleverTab()
-    if pumvisible()
-        return "\<C-n>"
-    endif
-    let substr = strpart(getline('.'), 0, col('.') - 1)
-    let substr = matchstr(substr, '[^ \t]*$')
-    if strlen(substr) == 0
-        " nothing to match on empty string
-        return "\<Tab>"
-    else
-        " existing text matching
-        if neosnippet#expandable_or_jumpable()
-            return "\<Plug>(neosnippet_expand_or_jump)"
-        else
-            return neocomplete#start_manual_complete()
-        endif
-    endif
-endfunction
+	function! CleverTab()
+		if pumvisible()
+			return "\<C-n>"
+		endif
+		let substr = strpart(getline('.'), 0, col('.') - 1)
+		let substr = matchstr(substr, '[^ \t]*$')
+		if strlen(substr) == 0
+			" nothing to match on empty string
+			return "\<Tab>"
+		else
+			" existing text matching
+			if neosnippet#expandable_or_jumpable()
+				return "\<Plug>(neosnippet_expand_or_jump)"
+			else
+				return neocomplete#start_manual_complete()
+			endif
+		endif
+	endfunction
 
-imap <expr> <Tab> CleverTab()
-" --------------------------------------------------------
+	imap <expr> <Tab> CleverTab()
+	" --------------------------------------------------------
 
-" Enable heavy omni completion.
-" 启用笨重的omni补全
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+	" Enable heavy omni completion.
+	" 启用笨重的omni补全
+	if !exists('g:neocomplete#sources#omni#input_patterns')
+		let g:neocomplete#sources#omni#input_patterns = {}
+	endif
+	let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+	let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+	let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+	let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+	let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
 
-" Enable omni completion. 启用omni补全
-"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-"autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+	" Enable omni completion. 启用omni补全
+	"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+	"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+	"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+	"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+	"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+	"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+	"autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 endif
 
 " --------------------------------------------------------}}}2
 " 配置snippets 设置
 " --------------------------------------------------------{{{2
+if isdirectory(expand("~/.vim/plugged/vim-snippets/"))
 " Use honza's snippets.
 let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
 
@@ -637,6 +644,7 @@ let g:go_snippet_engine = "neosnippet"
 " When enabled, there can be too much visual noise
 " especially when splits are used.
 set completeopt-=preview
+endif
 
 " --------------------------------------------------------}}}2
 " 配置synatastic 语法检查设置
@@ -660,11 +668,6 @@ source $VIMRUNTIME/ftplugin/man.vim
 " 配置auto-pairs插件 括号自动补全()[]{}
 " --------------------------------------------------------{{{2
 
-" --------------------------------------------------------}}}2
-" 设定中文doc帮助文档目录
-" --------------------------------------------------------{{{2
-"let helptags="$VIM/bundle/vimcdoc/doc"
-"set helplang=cn "设定帮助系统设置为中文
 " --------------------------------------------------------}}}2
 
 " ========================================================}}}1
