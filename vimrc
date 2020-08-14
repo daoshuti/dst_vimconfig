@@ -34,7 +34,8 @@ set autoread		" 文件在Vim之外修改过，自动重新读入
 set autowrite
 set backspace=indent,eol,start
 set cinoptions=:0
-set cursorline		" 为光标所在行加下划线
+set cursorcolumn    "高亮光标所在屏幕列
+set cursorline      "高亮光标所在屏幕行
 set completeopt=longest,menuone
 set fileencodings=utf-8,gb2312,gbk,gb18030 " 使用utf-8或gbk等编码打开文件
 set fileformat=unix
