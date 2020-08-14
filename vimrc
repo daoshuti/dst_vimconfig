@@ -238,14 +238,6 @@ call plug#end()
 
 " ========================================================{{{1
 
-" background
-" --------------------------------------------------------{{{2
-if has('gui_running')
-	set background=light " 配色主题的色系设置为light
-else
-	set background=dark  " 配色主题的色系设置为dark
-endif
-
 " --------------------------------------------------------}}}2
 " vim startify
 " --------------------------------------------------------{{{2
@@ -310,6 +302,12 @@ let g:startify_custom_header = [
 " --------------------------------------------------------}}}2
 " vim-colors-solarized插件
 " --------------------------------------------------------{{{2
+"if has('gui_running')
+"	set background=light " 配色主题的色系设置为light
+"else
+"	set background=dark  " 配色主题的色系设置为dark
+"endif
+set background=dark
 " 开启solarized
 let g:solarized_termcolors=256
 colorscheme solarized
