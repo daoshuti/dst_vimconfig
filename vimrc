@@ -16,6 +16,7 @@ set encoding=utf-8      " 使用utf-8编码格式
 scriptencoding utf-8    " vim脚本使用 utf-8格式
 set fileencodings=utf-8 " 文件缓冲区，使用utf-8编码格式
 set termencoding=utf-8  " terminal使用utf-8编码格式
+set fileformat=unix     " 文件格式设置为unix
 
 " Set Dos Mode
 if has('win32') || has('win64')
@@ -36,46 +37,55 @@ set autoindent          " 创建新行自动缩进
 set cindent             " 开启针对c文件的缩进
 set cinoptions=:0       " C程序中switch-case预计默认缩进0个字符
 set smartindent	        " 开启智能缩进，它不像cindent那样完美支持c文件的缩进，但对于未知类型文件的缩进，还是有帮助的
+
 set autoread            " 文件在Vim之外修改过，自动重新读入
 set autowrite
 set hidden
-set fileformat=unix     " 文件格式设置为unix
+
 set backspace=indent,eol,start
+set completeopt=longest,menuone " vim插入模式补全设置
+set pumheight=10        " 插入模式补全的弹出菜单的最大数目
+
+set tabstop=4           " 制表符为4
+set noexpandtab         " 不把制表符替换为空格
+"set expandtab          " 制表符替换为空格
+set shiftwidth=0        " 换行时使用0个空格，使用tab键风格时如此设置
+"set shiftwidth=4       " 换行时使用4个空格
+
+set number              " 显示行号
+set t_Co=256            " 开启256颜色
+set scrolloff=5         " 键盘上下滚动屏幕的最小临界行数
 set cursorcolumn        " 高亮光标所在屏幕列
 set cursorline          " 高亮光标所在屏幕行
-set completeopt=longest,menuone
+set nowrap              " 禁止文字自动换行
+"set textwidth=256      " 超过256个字符自动换行
+set mouse=a             " 可以使用鼠标
+set laststatus=2        " 指定何时显示状态行
+                        " 0 永远没有
+                        " 1 只有分割窗口时(默认值)
+                        " 2 总是存在
+set ruler               " 显示状态栏
+
+
 set foldenable          " 开启折叠功能
 set foldmethod=marker   " 代码折叠(标签折叠方式)
 "set foldmethod=indent  " 代码折叠（缩进折叠方式）
 "set foldmethod=syntax  " 代码折叠（语法折叠方式）
 set foldcolumn=0        " 每行前面有0个折叠标识列
+
 set helpheight=10       " 帮助窗口高度
 set helplang=cn         " 帮助系统设置为中文
 set history=1000        " 历史记录保留1000条
-set ignorecase          " 检索时忽略大小写
+
+set ignorecase          " 搜索模式，忽略大小写
+set smartcase           " 搜索模式，输入小写字符，其结果包含大小写字符(仅在ignorecase打开时)
 set incsearch           " highlight搜索结果
 set hlsearch            " 输入搜索命令时也会highlight
-set laststatus=2        " 指定何时显示状态行
-                        " 0 永远没有
-                        " 1 只有分割窗口时(默认值)
-                        " 2 总是存在
-set mouse=a             " 可以使用鼠标
-set number              " 显示行号
-set pumheight=10
-set ruler               " 显示状态栏
-set scrolloff=5         " 键盘上下滚动屏幕的最小临界行数
-set showcmd
-set smartcase
-set tabstop=4           " 制表符为4
-set noexpandtab         " 不把制表符替换为空格
-"set expandtab          " 制表符替换为空格
-set shiftwidth=0        "换行时使用0个空格，使用tab键风格时如此设置
-"set shiftwidth=4       "换行时使用4个空格
-set wildmenu
-set wildmode=list:longest,full
-set nowrap              " 禁止文字自动换行
-"set textwidth=256      " 超过256个字符自动换行
-set t_Co=256            " 开启256颜色
+
+set wildmenu            " 命令行补全增强
+set wildmode=list:longest,full " 命令行补全设置
+set showcmd             " 显示命令
+
 set nobackup            " 取消备份
 set noswapfile          " 不使用swapfile文件（不能灾难恢复）
 
