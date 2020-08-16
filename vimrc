@@ -179,8 +179,10 @@ Plug 'ludovicchabant/vim-gutentags'
 "Plug 'Shougo/neocomplete.vim'
 "Plug 'Shougo/neosnippet'
 "Plug 'Shougo/neosnippet-snippets'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+if has('python3')
+	Plug 'SirVer/ultisnips'
+	Plug 'honza/vim-snippets'
+endif
 
 " C++代码补全，比较古老，不是很好用
 Plug 'vim-scripts/OmniCppComplete'
@@ -506,7 +508,7 @@ endif
 " 配置ultisnips插件
 " --------------------------------------------------------{{{2
 
-if isdirectory(expand("~/.vim/plugged/ultisnips"))
+if isdirectory(expand("~/.vim/plugged/ultisnips")) && has('python3')
 	" 如果需要更多配置可以在vimrc中输入下面的，不配置使用默认的设置
 	let g:UltiSnipsExpandTrigger = "<tab>"
 	let g:UltiSnipsListSnippets = "<c-tab>"
