@@ -775,8 +775,8 @@ nnoremap <silent> <F5> :terminal<cr>
 nnoremap <silent> <F6> :call F6_shell()<cr>
 nnoremap <silent> <F7> :call F7_shell()<cr>
 nnoremap <silent> <F9> :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>
-"nnoremap <silent> <F10> :call RunShell("本地生成cscope文件", "bash ~/.vim/shell/create_cscope.sh")<cr>
-nnoremap <silent> <F12> :call RunShell("Generate cscope", "cscope -Rb")<cr>:cs add cscope.out<cr>
+nnoremap <silent> <F12> :call RunShell("Generate cscope.out", "bash ~/.vim/shell/create_cscope.sh")<cr>
+"nnoremap <silent> <F12> :call RunShell("Generate cscope.out", "cscope -Rb")<cr>:cs add cscope.out<cr>
 
 " --------------------------------------------------------}}}2
 "  cscope settings

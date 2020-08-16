@@ -1,37 +1,34 @@
-#!/bin/bash 
-##############################
-#制作人:程姚根
-#修改:王涵
-##############################
+#!/bin/bash
+# Author: wanghan
+# Created Time : 2020年08月16日 12:14:35
+# File Name: install.sh
+# Description: install and reinstall dst_vimconfig
 
-#备份OS中vim的配置   
-function bakup_vimconfig()
-{
-	echo "Bakup your vimconfig file..."
-	rm   -rf $HOME/.bakvim
-	mkdir $HOME/.bakvim
-	cp 	  $HOME/.vim  $HOME/.bakvim -a 
-	cp 	  $HOME/.vimrc $HOME/.bakvim 
-}
 
-#配置vim
-function config_vim()
-{
-	echo "Config your vim now !"
-	rm -rf $HOME/.vim 
-	cp ./vimrc $HOME/.vimrc 
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	vim +PlugInstall
-}
+echo Installing vim ...
+sudo apt install vim
 
-#主函数
-function main()
-{
-	sudo apt install ctags cscope vim-nox vim-gtk3
-	bakup_vimconfig
-	config_vim
-}
+echo Installing ctags cscope ...
+sudo apt install ctags cscope
 
-#执行脚本
-main
+echo Remove old vimcofnig ...
+echo Delete ~/.vim ...
+rm -rf ~/.vim 
+echo Delete ~/.vimrc ...
+rm -rf ~/.vimrc
+
+echo Link dst_vimconfig/imrc to ~/.vimrc ...
+ln -s vimrc $HOME/.vimrc 
+
+echo Installing vim-plug to ~/.vim/autoload/plug.vim ...
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+echo Installing dst_vimconfig/create_cscope.sh to ~/.vim/shell/create_cscope.sh ...
+mkdir -p ~/.vim/shell
+cp ./create_cscope.sh ~/.vim/shell
+
+echo Installing vim plugins ...
+vim +PlugInstall
+
+echo Done.
