@@ -177,12 +177,13 @@ Plug 'ludovicchabant/vim-gutentags'
 
 " 代码自动补全插件
 "Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
+"Plug 'Shougo/neosnippet'
+"Plug 'Shougo/neosnippet-snippets'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " C++代码补全，比较古老，不是很好用
-"Plug 'vim-scripts/OmniCppComplete'
+Plug 'vim-scripts/OmniCppComplete'
 
 " vim 字典仓库
 Plug 'skywind3000/vim-dict'
@@ -495,17 +496,34 @@ endif
 " 	--c++-kinds=+p : 为C++文件增加函数原型的标签
 " 	--fields=+iaS : 在标签文件中加入继承信息(i)、类成员的访问控制信息(a)、以及函数的指纹(S)
 " 	--extra=+q : 为标签增加类修饰符。注意，如果没有此选项，将不能对类成员补全
-"if isdirectory(expand("~/.vim/plugged/OmniCppComplete'"))
-if 0
+if isdirectory(expand("~/.vim/plugged/OmniCppComplete'"))
 	let g:OmniCpp_DefaultNamespaces=["std"]
 	let g:OmniCpp_MayCompleteScope=1
 	let g:OmniCpp_SelectFirstItem=2
 endif
 
 " --------------------------------------------------------}}}2
-" 配置neocomplete 补全插件，不支持Vim8.2以上，新版本推荐deoplete.nvim
+" 配置ultisnips插件
 " --------------------------------------------------------{{{2
 
+if isdirectory(expand("~/.vim/plugged/ultisnips"))
+	" 如果需要更多配置可以在vimrc中输入下面的，不配置使用默认的设置
+	let g:UltiSnipsExpandTrigger = "<tab>"
+	let g:UltiSnipsListSnippets = "<c-tab>"
+	let g:UltiSnipsJumpForwardTrigger = "<tab>"
+	let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+	" If you want :UltiSnipsEdit to split your window.
+	let g:UltiSnipsEditSplit="vertical"
+
+	if isdirectory(expand("~/.vim/plugged/vim-snippets/"))
+		let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/bundle/vim-snippets/UltiSnips']
+	endif
+endif
+
+" --------------------------------------------------------}}}2
+" 配置neocomplete 补全插件，不支持Vim8.2以上，新版本推荐deoplete.nvim
+" --------------------------------------------------------{{{2
 
 "if isdirectory(expand("~/.vim/plugged/neocomplete.vim/"))
 if 0
@@ -614,29 +632,23 @@ if 0
 endif
 
 " --------------------------------------------------------}}}2
-" 配置snippets 设置
+" 配置neosnippets 设置
 " --------------------------------------------------------{{{2
-if isdirectory(expand("~/.vim/plugged/vim-snippets/"))
-" Use honza's snippets.
-let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
+"if isdirectory(expand("~/.vim/plugged/neosnippet/"))
+if 0
+	" Use honza's snippets.
+	let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
 
-" Enable neosnippet snipmate compatibility mode
-let g:neosnippet#enable_snipmate_compatibility = 1
+	" Enable neosnippet snipmate compatibility mode
+	let g:neosnippet#enable_snipmate_compatibility = 1
 
-" For snippet_complete marker.
-if !exists("g:spf13_no_conceal")
-	if has('conceal')
-		set conceallevel=2 concealcursor=i
-	endif
-endif
+	" Enable neosnippets when using go
+	let g:go_snippet_engine = "neosnippet"
 
-" Enable neosnippets when using go
-let g:go_snippet_engine = "neosnippet"
-
-" Disable the neosnippet preview candidate window
-" When enabled, there can be too much visual noise
-" especially when splits are used.
-set completeopt-=preview
+	" Disable the neosnippet preview candidate window
+	" When enabled, there can be too much visual noise
+	" especially when splits are used.
+	set completeopt-=preview
 endif
 
 " --------------------------------------------------------}}}2
