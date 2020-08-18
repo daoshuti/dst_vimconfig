@@ -199,6 +199,11 @@ Plug 'skywind3000/vim-dict'
 " vimcdoc中文vim文档
 Plug 'yianwillis/vimcdoc'
 
+" Terminal
+if has('python2') " only python2
+	Plug 'rosenfeld/conque-term'
+endif
+
 " --------------------------------------------------------}}}2
 " 延迟按需加载，使用到命令的时候再加载的插件
 " --------------------------------------------------------{{{2
@@ -360,7 +365,7 @@ if isdirectory(expand("~/.vim/plugged/vim-gutentags/"))
 
 	" 所生成的数据文件的名称
 	let g:gutentags_ctags_tagfile = '.tags'
-	let g:gutentags_cscopefile = 'cscope.out'
+	"let g:gutentags_cscopefile = 'cscope.out'
 
 	" 同时开启 ctags 和 gtags 支持：
 	let g:gutentags_modules = []
@@ -373,15 +378,15 @@ if isdirectory(expand("~/.vim/plugged/vim-gutentags/"))
 		" 如果使用 universal ctags 需要增加下面一行，老的 Exuberant-ctags 不能加下一行
 		"let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 	endif
-	if executable('cscope')
-		let g:gutentags_modules += ['cscope']
-		let g:gutentags_auto_add_cscope = 1
-	endif
-	if executable('gtags-cscope') && executable('gtags')
-		let g:gutentags_modules += ['gtags_cscope']
-		" 禁用 gutentags 自动加载 gtags 数据库的行为
-		let g:gutentags_auto_add_gtags_cscope = 0
-	endif
+	"if executable('cscope')
+	"	let g:gutentags_modules += ['cscope']
+	"	let g:gutentags_auto_add_cscope = 1
+	"endif
+	"if executable('gtags-cscope') && executable('gtags')
+	"	let g:gutentags_modules += ['gtags_cscope']
+	"	" 禁用 gutentags 自动加载 gtags 数据库的行为
+	"	let g:gutentags_auto_add_gtags_cscope = 0
+	"endif
 endif
 
 " --------------------------------------------------------}}}2
@@ -524,136 +529,6 @@ if isdirectory(expand("~/.vim/plugged/ultisnips")) && has('python3')
 endif
 
 " --------------------------------------------------------}}}2
-" 配置neocomplete 补全插件，不支持Vim8.2以上，新版本推荐deoplete.nvim
-" --------------------------------------------------------{{{2
-
-"if isdirectory(expand("~/.vim/plugged/neocomplete.vim/"))
-if 0
-	let g:acp_enableAtStartup = 0 " 禁用acp(AutoComplPop)
-	let g:neocomplete#enable_at_startup = 1 " 打开neocomplete
-	let g:neocomplete#enable_smart_case = 1 " 智能大小写
-	let g:neocomplete#enable_auto_delimiter = 1 " 自动分隔符
-	let g:neocomplete#max_list = 15 " 下拉菜单最多15行
-	let g:neocomplete#force_overwrite_completefunc = 1 " 强制覆盖completefunc
-
-	" Define dictionary. 定义字典
-	let g:neocomplete#sources#dictionary#dictionaries = {
-				\ 'default' : '',
-				\ 'vimshell' : $HOME.'/.vimshell_hist',
-				\ 'scheme' : $HOME.'/.gosh_completions'
-				\ }
-
-	" Define keyword. 定义关键字
-	if !exists('g:neocomplete#keyword_patterns')
-		let g:neocomplete#keyword_patterns = {}
-	endif
-	let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-	" complete-key-map-setting 
-	" --------------------------------------------------------
-	" <C-k> Complete Snippet
-	" <C-k> Jump to next snippet point
-	imap <silent><expr><C-k> neosnippet#expandable() ?
-				\ "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ?
-				\ "\<C-e>" : "\<Plug>(neosnippet_expand_or_jump)")
-	smap <TAB> <Right><Plug>(neosnippet_jump_or_expand)
-
-	inoremap <expr><C-g> neocomplete#undo_completion()
-	inoremap <expr><C-l> neocomplete#complete_common_string()
-	"inoremap <expr><CR> neocomplete#complete_common_string()
-
-	" <CR>: close popup
-	" <s-CR>: close popup and save indent.
-	inoremap <expr><s-CR> pumvisible() ? neocomplete#smart_close_popup()."\<CR>" : "\<CR>"
-
-	function! CleverCr()
-		if pumvisible()
-			if neosnippet#expandable()
-				let exp = "\<Plug>(neosnippet_expand)"
-				return exp . neocomplete#smart_close_popup()
-			else
-				return neocomplete#smart_close_popup()
-			endif
-		else
-			return "\<CR>"
-		endif
-	endfunction
-
-	" <CR> close popup and save indent or expand snippet
-	imap <expr> <CR> CleverCr()
-	" <C-h>, <BS>: close popup and delete backword char.
-	inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-	inoremap <expr><C-y> neocomplete#smart_close_popup()
-	" <TAB>: completion.
-	inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-	inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
-
-	" Courtesy of Matteo Cavalleri
-
-	function! CleverTab()
-		if pumvisible()
-			return "\<C-n>"
-		endif
-		let substr = strpart(getline('.'), 0, col('.') - 1)
-		let substr = matchstr(substr, '[^ \t]*$')
-		if strlen(substr) == 0
-			" nothing to match on empty string
-			return "\<Tab>"
-		else
-			" existing text matching
-			if neosnippet#expandable_or_jumpable()
-				return "\<Plug>(neosnippet_expand_or_jump)"
-			else
-				return neocomplete#start_manual_complete()
-			endif
-		endif
-	endfunction
-
-	imap <expr> <Tab> CleverTab()
-	" --------------------------------------------------------
-
-	" Enable heavy omni completion.
-	" 启用笨重的omni补全
-	if !exists('g:neocomplete#sources#omni#input_patterns')
-		let g:neocomplete#sources#omni#input_patterns = {}
-	endif
-	let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-	let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-	let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-	let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-	let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
-
-	" Enable omni completion. 启用omni补全
-	"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-	"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-	"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-	"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-	"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-	"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-	"autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-endif
-
-" --------------------------------------------------------}}}2
-" 配置neosnippets 设置
-" --------------------------------------------------------{{{2
-"if isdirectory(expand("~/.vim/plugged/neosnippet/"))
-if 0
-	" Use honza's snippets.
-	let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
-
-	" Enable neosnippet snipmate compatibility mode
-	let g:neosnippet#enable_snipmate_compatibility = 1
-
-	" Enable neosnippets when using go
-	let g:go_snippet_engine = "neosnippet"
-
-	" Disable the neosnippet preview candidate window
-	" When enabled, there can be too much visual noise
-	" especially when splits are used.
-	set completeopt-=preview
-endif
-
-" --------------------------------------------------------}}}2
 " 配置synatastic 语法检查设置
 " --------------------------------------------------------{{{2
 "set statusline+=%#warningmsg#
@@ -771,7 +646,11 @@ endfunction
 nnoremap <silent> <F2> :TagbarToggle<CR>
 nnoremap <silent> <F3> :NERDTreeToggle<cr>
 nnoremap <silent> <F4> :ALEToggle<cr>
-nnoremap <silent> <F5> :terminal<cr>
+if has('python2') " only python2
+	nnoremap <silent> <F5> :ConqueTermSplit bash<cr>
+else
+	nnoremap <silent> <F5> :terminal<cr>
+endif
 nnoremap <silent> <F6> :call F6_shell()<cr>
 nnoremap <silent> <F7> :call F7_shell()<cr>
 nnoremap <silent> <F9> :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>
