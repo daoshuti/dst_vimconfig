@@ -44,7 +44,7 @@ set hidden
 
 set backspace=indent,eol,start
 set completeopt=longest,menuone " vim插入模式补全设置
-set pumheight=10        " 插入模式补全的弹出菜单的最大数目
+"set pumheight=10        " 插入模式补全的弹出菜单的最大数目
 
 set tabstop=4           " 制表符为4
 set noexpandtab         " 不把制表符替换为空格
