@@ -126,11 +126,14 @@ call plug#begin('~/.vim/plugged')
 " vim start panel
 Plug 'mhinz/vim-startify'
 
-" vim theme
+" some colorsthemes
 "Plug 'flazz/vim-colorschemes'
 
-" vim文字和背景配色
-Plug 'altercation/vim-colors-solarized'
+" solarized colorstheme
+"Plug 'altercation/vim-colors-solarized'
+
+" molokai colorstheme
+Plug 'tomasr/molokai'
 
 " airline 状态栏插件
 Plug 'vim-airline/vim-airline'
@@ -143,11 +146,17 @@ Plug 'vim-airline/vim-airline-themes'
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 " 简化写法省略前面的github网址前缀，当然全写也是OK的
 
+" 将代码行最后无效的空格标红
+Plug 'bronson/vim-trailing-whitespace'
+
 " 格式化对齐，代码中的等号
 "Plug 'junegunn/vim-easy-align' " 有趣，但是非高频使用，暂时注释掉
 
 " highlight current word
 Plug 'dominikduda/vim_current_word'
+
+" 缩进UI标识
+Plug 'Yggdroot/indentLine'
 
 " 彩虹括号
 Plug 'luochen1990/rainbow'
@@ -217,7 +226,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 " 异步检查vim中的语法问题并提示
-Plug 'w0rp/ale', { 'on': 'ALEToggle' }
+"Plug 'w0rp/ale', { 'on': 'ALEToggle' }
 
 " gocode go语言代码补全插件
 "Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
@@ -253,20 +262,19 @@ if isdirectory(expand("~/.vim/plugged/vim-startify/"))
 				\ ' \/__,_ /\/___/   \/__/     \/__/    \/_/\/_/\/_/\/_/\/____/\/___/  \/_/\/_/\/_/   \/_/\/___L\ \',
 				\ '                                                                                         /\____/',
 				\ '                                                                                         \_/__/ ',
-				\ '                        +------------------------------+',
-				\ '                        |         dst vimconfig        |',
-				\ '                        +------------------------------+',
-				\ '                        | <F1> vim help 窗口           |',
-				\ '                        | <F2> tagbar   窗口           |',
-				\ '                        | <F3> 文件浏览 窗口           |',
-				\ '                        | <F4> 语法检查                |',
-				\ '                        | <F5> 打开终端                |',
-				\ '                        | <F6> 粘贴模式                |',
-				\ '                        | <F7> 代码折叠                |',
-				\ '                        | <F9> 生成tags                |',
-				\ '                        | <F12>生成cscope.out          |',
-				\ '                        |   -  切换panel和tab          |',
-				\ '                        +------------------------------+',
+				\ ' +------------------------------+',
+				\ ' |         dst vimconfig        |',
+				\ ' +------------------------------+',
+				\ ' | <F1> vim help 窗口           |',
+				\ ' | <F2> tagbar   窗口           |',
+				\ ' | <F3> 文件浏览 窗口           |',
+				\ ' | <F5> 打开终端                |',
+				\ ' | <F6> 粘贴模式                |',
+				\ ' | <F7> 代码折叠                |',
+				\ ' | <F9> 生成tags                |',
+				\ ' | <F12>生成cscope.out          |',
+				\ ' |   -  切换panel和tab          |',
+				\ ' +------------------------------+',
 				\]
 
 	"let g:startify_custom_footer = [
@@ -279,16 +287,18 @@ endif
 " --------------------------------------------------------}}}2
 " vim-colors-solarized插件
 " --------------------------------------------------------{{{2
-if isdirectory(expand("~/.vim/plugged/vim-colors-solarized/"))
-	"if has('gui_running')
-	"	set background=light " 配色主题的色系设置为light
-	"else
-	"	set background=dark  " 配色主题的色系设置为dark
-	"endif
-	set background=dark
-	" 开启solarized
-	let g:solarized_termcolors=256
-	colorscheme solarized
+"if has('gui_running')
+"	set background=light " 配色主题的色系设置为light
+"else
+"	set background=dark  " 配色主题的色系设置为dark
+"endif
+set background=dark
+"if isdirectory(expand("~/.vim/plugged/vim-colors-solarized"))
+"	let g:solarized_termcolors=256
+"	colorscheme solarized
+"endif
+if isdirectory(expand("~/.vim/plugged/molokai"))
+	colorscheme molokai
 endif
 
 " --------------------------------------------------------}}}2
@@ -344,14 +354,6 @@ endif
 "autocmd FileType go setlocal tags+=~/.cache/tags/go.tags
 "autocmd FileType go setlocal tags+=~/.cache/tags/data-wanghan-work-aosp-j6b2r-build-soong-.tags
 set tags+=./.tags;,.tags
-
-" --------------------------------------------------------}}}2
-"  Gtags
-" --------------------------------------------------------{{{2
-if 0
-	let $GTAGSLABEL = 'native-pygments'
-	let $GTAGSCONF = '/path/to/share/gtags/gtags.conf'
-endif
 
 " --------------------------------------------------------}}}2
 " gutentags 插件设置
@@ -529,19 +531,6 @@ if isdirectory(expand("~/.vim/plugged/ultisnips")) && has('python3')
 endif
 
 " --------------------------------------------------------}}}2
-" 配置synatastic 语法检查设置
-" --------------------------------------------------------{{{2
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-
-
-" --------------------------------------------------------}}}2
 " 配置Man.vim Man手册
 " --------------------------------------------------------{{{2
 source $VIMRUNTIME/ftplugin/man.vim
@@ -549,6 +538,16 @@ source $VIMRUNTIME/ftplugin/man.vim
 " --------------------------------------------------------}}}2
 " 配置auto-pairs插件 括号自动补全()[]{}
 " --------------------------------------------------------{{{2
+if isdirectory(expand("~/.vim/plugged/auto-pairs"))
+endif
+
+" --------------------------------------------------------}}}2
+" 配置indentLine插件，显示缩进提示符
+" --------------------------------------------------------{{{2
+if isdirectory(expand("~/.vim/plugged/indentLine"))
+	"let g:indentLine_char = '|'
+	"let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+endif
 
 " --------------------------------------------------------}}}2
 
@@ -645,7 +644,7 @@ endfunction
 " <F12> 生成cscope.out数据库文件
 nnoremap <silent> <F2> :TagbarToggle<CR>
 nnoremap <silent> <F3> :NERDTreeToggle<cr>
-nnoremap <silent> <F4> :ALEToggle<cr>
+"nnoremap <silent> <F4> :ALEToggle<cr>
 if has('python2') " only python2
 	nnoremap <silent> <F5> :ConqueTermSplit bash<cr>
 else
