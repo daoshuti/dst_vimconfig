@@ -164,9 +164,6 @@ Plug 'luochen1990/rainbow'
 " 输入时自动配对括号
 Plug 'jiangmiao/auto-pairs'
 
-" 窗口管理
-Plug 't9md/vim-choosewin'
-
 " 搜索单词内部，如果也包含关键字则高亮
 Plug 'google/vim-searchindex'
 
@@ -225,6 +222,9 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 " vim中的git插件
 Plug 'tpope/vim-fugitive', { 'on': 'Git' }
 
+" 窗口切换
+Plug 't9md/vim-choosewin', { 'on': 'ChooseWin' }
+
 " 异步检查vim中的语法问题并提示
 "Plug 'w0rp/ale', { 'on': 'ALEToggle' }
 
@@ -268,12 +268,12 @@ if isdirectory(expand("~/.vim/plugged/vim-startify/"))
 				\ ' | <F1> vim help 窗口           |',
 				\ ' | <F2> tagbar   窗口           |',
 				\ ' | <F3> 文件浏览 窗口           |',
+				\ ' | <F4> 切换窗口 (panel & tag)  |',
 				\ ' | <F5> 打开终端                |',
 				\ ' | <F6> 粘贴模式                |',
 				\ ' | <F7> 代码折叠                |',
 				\ ' | <F9> 生成tags                |',
 				\ ' | <F12>生成cscope.out          |',
-				\ ' |   -  切换panel和tab          |',
 				\ ' +------------------------------+',
 				\]
 
@@ -684,15 +684,15 @@ nnoremap <silent> <F12> :call RunShell("Generate cscope.out", "bash ~/.vim/shell
 "		7 or f: Find this file
 "		8 or i: Find files #including this file
 "
-nmap <leader>sa :cs add cscope.out<cr>
-nmap <leader>ss :cs find s <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>sg :cs find g <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>sc :cs find c <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>st :cs find t <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>se :cs find e <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>sf :cs find f <C-R>=expand("<cfile>")<cr><cr>
-nmap <leader>si :cs find i <C-R>=expand("<cfile>")<cr><cr>
+nnoremap <silent> <leader>sa :cs add cscope.out<cr>
+nnoremap <silent> <leader>ss :cs find s <C-R>=expand("<cword>")<cr><cr>
+nnoremap <silent> <leader>sg :cs find g <C-R>=expand("<cword>")<cr><cr>
+nnoremap <silent> <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
+nnoremap <silent> <leader>sc :cs find c <C-R>=expand("<cword>")<cr><cr>
+nnoremap <silent> <leader>st :cs find t <C-R>=expand("<cword>")<cr><cr>
+nnoremap <silent> <leader>se :cs find e <C-R>=expand("<cword>")<cr><cr>
+nnoremap <silent> <leader>sf :cs find f <C-R>=expand("<cfile>")<cr><cr>
+nnoremap <silent> <leader>si :cs find i <C-R>=expand("<cfile>")<cr><cr>
 
 " --------------------------------------------------------}}}2
 " 标签页快捷键
@@ -701,10 +701,10 @@ nmap <leader>si :cs find i <C-R>=expand("<cfile>")<cr><cr>
 ",x 删除标签
 ",[ 移动到前一个标签
 ",] 移动到下一个标签
-nmap <leader>c :tabnew<cr>
-nmap <leader>x :tabclose<cr>
-nmap <leader>] :tabn<cr>
-nmap <leader>[ :tabp<cr>
+nnoremap <silent> <leader>c :tabnew<cr>
+nnoremap <silent> <leader>x :tabclose<cr>
+nnoremap <silent> <leader>] :tabn<cr>
+nnoremap <silent> <leader>[ :tabp<cr>
 
 " choosewin keymap
 "	| Key  | Action     | Description                   |
@@ -722,7 +722,8 @@ nmap <leader>[ :tabp<cr>
 "	|      | <NOP>      | Disable predefined keymap     |
 if isdirectory(expand("~/.vim/plugged/vim-choosewin"))
 	" invoke with '-'
-	nmap  -  <Plug>(choosewin)
+	"nmap  -  <Plug>(choosewin)
+	nnoremap <silent> <F4> :ChooseWin<cr>
 	" if you want to use overlay feature
 	let g:choosewin_overlay_enable = 1
 endif
