@@ -64,7 +64,7 @@ set laststatus=2        " 指定何时显示状态行
                         " 0 永远没有
                         " 1 只有分割窗口时(默认值)
                         " 2 总是存在
-set ruler               " 显示状态栏
+"set ruler              " 状态栏显示光标所在行列的位置
 
 
 set foldenable          " 开启折叠功能
@@ -167,9 +167,6 @@ Plug 'jiangmiao/auto-pairs'
 " 窗口管理
 Plug 't9md/vim-choosewin'
 
-" vim中的git插件
-Plug 'tpope/vim-fugitive'
-
 " 搜索单词内部，如果也包含关键字则高亮
 Plug 'google/vim-searchindex'
 
@@ -224,6 +221,9 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
 " 代码速览插件(用tagbar替代了taglist)
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+
+" vim中的git插件
+Plug 'tpope/vim-fugitive', { 'on': 'Git' }
 
 " 异步检查vim中的语法问题并提示
 "Plug 'w0rp/ale', { 'on': 'ALEToggle' }
@@ -720,10 +720,12 @@ nmap <leader>[ :tabp<cr>
 "	| S    | swap_stay  | Swap windows but stay      #1 |
 "	| <CR> | win_land   | Navigate to current window    |
 "	|      | <NOP>      | Disable predefined keymap     |
-" invoke with '-'
-nmap  -  <Plug>(choosewin)
-" if you want to use overlay feature
-let g:choosewin_overlay_enable = 1
+if isdirectory(expand("~/.vim/plugged/vim-choosewin"))
+	" invoke with '-'
+	nmap  -  <Plug>(choosewin)
+	" if you want to use overlay feature
+	let g:choosewin_overlay_enable = 1
+endif
 
 " --------------------------------------------------------}}}2
 
