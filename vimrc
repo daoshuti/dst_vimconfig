@@ -137,7 +137,7 @@ Plug 'tomasr/molokai'
 
 " airline 状态栏插件
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline-themes'
 
 " --------------------------------------------------------}}}2
 " 直接加载的插件
@@ -306,7 +306,8 @@ endif
 " --------------------------------------------------------{{{2
 
 if isdirectory(expand("~/.vim/plugged/vim-airline/"))
-	if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
+	"if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
+	if 0
 		" ~/.vim/plugged/vim-airline-themes/autoload/airline/路径下可以查看配色
 		"let g:airline_theme='solarized'   " airline配色
 		"let g:airline_theme='term_light'  " airline配色
