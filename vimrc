@@ -167,6 +167,9 @@ Plug 'jiangmiao/auto-pairs'
 " 搜索单词内部，如果也包含关键字则高亮
 Plug 'google/vim-searchindex'
 
+"buffer管理
+"Plug 'fholgado/minibufexpl.vim'
+
 " markdown
 "Plug 'plasticboy/vim-markdown'
 
@@ -316,7 +319,13 @@ if isdirectory(expand("~/.vim/plugged/vim-airline/"))
 	endif
 
 	let g:airline#extensions#tabline#enabled = 1 "顶部tab显示"
-	"let g:airline#extensions#tabline#buffer_nr_show = 1
+	let g:airline#extensions#tabline#show_tabs = 1
+	let g:airline#extensions#tabline#show_tab_nr = 1
+	let g:airline#extensions#tabline#show_tab_type = 1
+	let g:airline#extensions#tabline#show_tab_count = 2
+	let g:airline#extensions#tabline#show_splits = 1
+	let g:airline#extensions#tabline#show_buffers = 1
+	let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
 	let g:airline#extensions#whitespace#enabled=0
 
 	let g:airline_powerline_fonts=0
