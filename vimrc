@@ -193,7 +193,8 @@ let g:dst_complete_mode='old'
 "let g:dst_complete_mode=''
 
 " ctags管理
-Plug 'ludovicchabant/vim-gutentags'
+"Plug 'ludovicchabant/vim-gutentags'
+Plug 'daoshuti/vim-gutentags'
 
 if g:dst_complete_mode is# 'old'
 	" AutoComplPop 是按字典进行补全的，只有你输入过的单词才可以补全
@@ -271,19 +272,22 @@ if isdirectory(expand("~/.vim/plugged/vim-startify"))
 				\ ' \/__,_ /\/___/   \/__/     \/__/    \/_/\/_/\/_/\/_/\/____/\/___/  \/_/\/_/\/_/   \/_/\/___L\ \',
 				\ '                                                                                         /\____/',
 				\ '                                                                                         \_/__/ ',
-				\ ' +------------------------------+',
-				\ ' |         dst vimconfig        |',
-				\ ' +------------------------------+',
-				\ ' | <F1> vim help 窗口           |',
-				\ ' | <F2> tagbar   窗口           |',
-				\ ' | <F3> 文件浏览 窗口           |',
-				\ ' | <F4> 切换窗口 (panel & tag)  |',
-				\ ' | <F5> 打开终端                |',
-				\ ' | <F6> 粘贴模式                |',
-				\ ' | <F7> 代码折叠                |',
-				\ ' | <F9> 生成tags                |',
-				\ ' | <F12>生成cscope.out          |',
-				\ ' +------------------------------+',
+				\ ' +------------------------------+-------------------------------+-----------------------+',
+				\ ' |         <Fn>键的功能         |       cscope命令说明          |     标签页快捷键      |',
+				\ ' +------------------------------+-------------------------------+-----------------------+',
+				\ ' | <F1> vim help 窗口           | :cs show 查看已加载的数据库   | ,c   创建新标签页     |',
+				\ ' | <F1> vim help 窗口           | :cs add  加载指定的数据库     | ,x   删除标签页       |',
+				\ ' | <F2> tagbar   窗口           | ,ss      查找symbol           | ,[   移动到前一个标签 |',
+				\ ' | <F3> 文件浏览 窗口           | ,sg      查找定义             | ,]   移动到下一个标签 |',
+				\ ' | <F4> 切换窗口 (panel & tag)  | ,sd      查找本函数调用的函数 |-----------------------+',
+				\ ' | <F5> 打开终端                | ,sc      查找调用本函数的函数 |      ctags跳转        |',
+				\ ' | <F6> 粘贴模式                | ,st      查找指定的字符串     |-----------------------+',
+				\ ' | <F7> 代码折叠                | ,se      查找egrep模式        | Ctrl+]   跳转到定义   |',
+				\ ' | <F9> 生成tags                | ,sf      查找并打开文件       | Ctrl+o   返回上一级   |',
+				\ ' | <F12>生成cscope.out          | ,si      查找包含本文件的文件 |                       |',
+				\ ' +------------------------------+-------------------------------+-----------------------+',
+				\ ' |            请在Normal模式使用上述快捷键 (Esc进去Normal, i进入Insert模式)             |',
+				\ ' +------------------------------+-------------------------------+-----------------------+',
 				\]
 
 	"let g:startify_custom_footer = [
@@ -762,7 +766,7 @@ nnoremap <silent> <F12> :call RunShell("Generate cscope.out", "bash ~/.vim/shell
 "		7 or f: Find this file
 "		8 or i: Find files #including this file
 "
-nnoremap <silent> <leader>sa :cs add cscope.out<cr>
+nnoremap <silent> <leader>sw :cs show<cr>
 nnoremap <silent> <leader>ss :cs find s <C-R>=expand("<cword>")<cr><cr>
 nnoremap <silent> <leader>sg :cs find g <C-R>=expand("<cword>")<cr><cr>
 nnoremap <silent> <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
