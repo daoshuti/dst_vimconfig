@@ -118,6 +118,9 @@ endif
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+" 简化写法省略前面的github网址前缀，当然全写也是OK的
+
 
 " --------------------------------------------------------}}}2
 " UI插件
@@ -139,18 +142,8 @@ Plug 'tomasr/molokai'
 Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
-" --------------------------------------------------------}}}2
-" 直接加载的插件
-" --------------------------------------------------------{{{2
-
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-" 简化写法省略前面的github网址前缀，当然全写也是OK的
-
 " 将代码行最后无效的空格标红
 Plug 'bronson/vim-trailing-whitespace'
-
-" 格式化对齐，代码中的等号
-"Plug 'junegunn/vim-easy-align' " 有趣，但是非高频使用，暂时注释掉
 
 " highlight current word
 Plug 'dominikduda/vim_current_word'
@@ -161,46 +154,12 @@ Plug 'Yggdroot/indentLine'
 " 彩虹括号
 Plug 'luochen1990/rainbow'
 
-" 输入时自动配对括号
-Plug 'jiangmiao/auto-pairs'
-
 " 搜索单词内部，如果也包含关键字则高亮
 Plug 'google/vim-searchindex'
 
-"buffer管理
-"Plug 'fholgado/minibufexpl.vim'
-
-" markdown
-"Plug 'plasticboy/vim-markdown'
-
-" AutoComplPop 是按字典进行补全的，只有你输入过的单词才可以补全
-" 默认只有输入两个字符，才会提示
-" vim输入时自动补全提示 比较古老，暂无好的替代品
-Plug 'eikenb/acp'
-
-" ctags管理
-Plug 'ludovicchabant/vim-gutentags'
-
-" 代码自动补全插件
-"Plug 'Shougo/neocomplete.vim'
-"Plug 'Shougo/neosnippet'
-"Plug 'Shougo/neosnippet-snippets'
-if has('python3')
-	Plug 'SirVer/ultisnips'
-	Plug 'honza/vim-snippets'
-endif
-
-" C++代码补全，比较古老，不是很好用
-Plug 'vim-scripts/OmniCppComplete'
-
-" vim 字典仓库
-Plug 'skywind3000/vim-dict'
-
-" 语法检查，需配合相应的语法检查器
-"Plug 'vim-syntastic/syntastic'
-
-" ctrlp快速搜索文件并打开
-"Plug 'kien/ctrlp.vim' " 有用，但是非高频使用注释掉
+" --------------------------------------------------------}}}2
+" 直接加载的插件
+" --------------------------------------------------------{{{2
 
 " vimcdoc中文vim文档
 Plug 'yianwillis/vimcdoc'
@@ -208,6 +167,53 @@ Plug 'yianwillis/vimcdoc'
 " Terminal
 if has('python2') " only python2
 	Plug 'rosenfeld/conque-term'
+endif
+
+" 格式化对齐，代码中的等号
+"Plug 'junegunn/vim-easy-align' " 有趣，但是非高频使用，暂时注释掉
+
+"buffer管理
+"Plug 'fholgado/minibufexpl.vim'
+
+" markdown
+"Plug 'plasticboy/vim-markdown'
+
+" ctrlp快速搜索文件并打开
+"Plug 'kien/ctrlp.vim' " 有用，但是非高频使用注释掉
+
+" 输入时自动配对括号
+Plug 'jiangmiao/auto-pairs'
+
+
+" 语法检查，需配合相应的语法检查器
+"Plug 'vim-syntastic/syntastic'
+
+let g:dst_complete_mode='old'
+"let g:dst_complete_mode='YouCompleteMe'
+"let g:dst_complete_mode=''
+
+" ctags管理
+Plug 'ludovicchabant/vim-gutentags'
+
+if g:dst_complete_mode is# 'old'
+	" AutoComplPop 是按字典进行补全的，只有你输入过的单词才可以补全
+	" 默认只有输入两个字符，才会提示
+	" vim输入时自动补全提示 比较古老，暂无好的替代品
+	Plug 'eikenb/acp'
+	" vim 字典仓库
+	Plug 'skywind3000/vim-dict'
+	" C++代码补全，比较古老，不是很好用
+	Plug 'vim-scripts/OmniCppComplete'
+elseif g:dst_complete_mode is# 'YouCompleteMe'
+	Plug 'ycm-core/YouCompleteMe'
+else
+	echomsg 'Please set g:dst_complete_mode!'
+endif
+
+" 代码片段自动补全插件
+if has('python3')
+	Plug 'SirVer/ultisnips'
+	Plug 'honza/vim-snippets'
 endif
 
 " --------------------------------------------------------}}}2
@@ -252,7 +258,7 @@ call plug#end()
 " --------------------------------------------------------}}}2
 " vim startify
 " --------------------------------------------------------{{{2
-if isdirectory(expand("~/.vim/plugged/vim-startify/"))
+if isdirectory(expand("~/.vim/plugged/vim-startify"))
 
 	"http://patorjk.com/software/taag
 	let g:startify_custom_header = [
@@ -308,7 +314,7 @@ endif
 " 配置airline，美化状态栏和顶部tab
 " --------------------------------------------------------{{{2
 
-if isdirectory(expand("~/.vim/plugged/vim-airline/"))
+if isdirectory(expand("~/.vim/plugged/vim-airline"))
 	"if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
 	if 0
 		" ~/.vim/plugged/vim-airline-themes/autoload/airline/路径下可以查看配色
@@ -354,17 +360,18 @@ endif
 " --------------------------------------------------------{{{2
 " 添加tags文件(以便使用代码跳转和补全)
 "set tags+=/usr/include/tags
-"autocmd FileType c setlocal tags+=~/.cache/tags/libc.tags
-"autocmd FileType cpp setlocal tags+=~/.cache/tags/libc.tags
-"autocmd FileType cpp setlocal tags+=~/.cache/tags/libcxx.tags
-"autocmd FileType go setlocal tags+=~/.cache/tags/go.tags
-"autocmd FileType go setlocal tags+=~/.cache/tags/data-wanghan-work-aosp-j6b2r-build-soong-.tags
 set tags+=./.tags;,.tags
+set tags+=./tags;,tags
 
 " --------------------------------------------------------}}}2
 " gutentags 插件设置
 " --------------------------------------------------------{{{2
-if isdirectory(expand("~/.vim/plugged/vim-gutentags/"))
+if isdirectory(expand("~/.vim/plugged/vim-gutentags"))
+	"开启gutentags debug log
+	"运行`:GutentagsToggleEnabled`打开日志
+	"运行`:GutentagsToggleTrace`命令打开日志
+	"let g:gutentags_define_advanced_commands = 1
+
 	" gutentags 搜索工程目录的标志，当前文件路径向上递归直到碰到这些文件/目录名
 	let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 
@@ -373,7 +380,7 @@ if isdirectory(expand("~/.vim/plugged/vim-gutentags/"))
 
 	" 所生成的数据文件的名称
 	let g:gutentags_ctags_tagfile = '.tags'
-	"let g:gutentags_cscopefile = 'cscope.out'
+	"let g:gutentags_cscopefile = '.cscope.out'
 
 	" 同时开启 ctags 和 gtags 支持：
 	let g:gutentags_modules = []
@@ -386,10 +393,10 @@ if isdirectory(expand("~/.vim/plugged/vim-gutentags/"))
 		" 如果使用 universal ctags 需要增加下面一行，老的 Exuberant-ctags 不能加下一行
 		"let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 	endif
-	"if executable('cscope')
-	"	let g:gutentags_modules += ['cscope']
-	"	let g:gutentags_auto_add_cscope = 1
-	"endif
+	if executable('cscope')
+		let g:gutentags_modules += ['cscope']
+		let g:gutentags_auto_add_cscope = 1
+	endif
 	"if executable('gtags-cscope') && executable('gtags')
 	"	let g:gutentags_modules += ['gtags_cscope']
 	"	" 禁用 gutentags 自动加载 gtags 数据库的行为
@@ -426,7 +433,7 @@ endif
 " 配置vim_current_word，自动高亮光标选中的单词
 " --------------------------------------------------------{{{2
 
-if isdirectory(expand("~/.vim/plugged/vim_current_word/"))
+if isdirectory(expand("~/.vim/plugged/vim_current_word"))
 	let g:vim_current_word#enabled = 1 "打开vim_current_word插件
 	"let g:vim_current_word#highlight_twins = 1 "高亮相似的词
 	let g:vim_current_word#highlight_current_word = 1 "高亮选中的单词
@@ -437,7 +444,7 @@ endif
 " --------------------------------------------------------}}}2
 " 配置rainbow插件，显示彩色的括号
 " --------------------------------------------------------{{{2
-if isdirectory(expand("~/.vim/plugged/rainbow/"))
+if isdirectory(expand("~/.vim/plugged/rainbow"))
 	let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 	let g:rainbow_conf = {
 				\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
@@ -466,7 +473,7 @@ endif
 " --------------------------------------------------------}}}2
 " 配置tagbar插件
 " --------------------------------------------------------{{{2
-if isdirectory(expand("~/.vim/plugged/tagbar/"))
+if isdirectory(expand("~/.vim/plugged/tagbar"))
 	let g:tagbar_left = 1
 	let g:tagbar_autoclose = 1
 	let g:tagbar_sort = 0
@@ -475,7 +482,7 @@ endif
 " --------------------------------------------------------}}}2
 " 配置NERDTree插件
 " --------------------------------------------------------{{{2
-if isdirectory(expand("~/.vim/plugged/nerdtree/"))
+if isdirectory(expand("~/.vim/plugged/nerdtree"))
 	"let Tlist_Show_One_File=1      " 打开文件时默认打开NERDTree
 	let g:NERDTreeWinPos="right"   " 在右侧打NERDTree
 	"let g:NERDTreeWinSize=25       " 宽度设置为25个字符
@@ -511,7 +518,7 @@ endif
 " 	--c++-kinds=+p : 为C++文件增加函数原型的标签
 " 	--fields=+iaS : 在标签文件中加入继承信息(i)、类成员的访问控制信息(a)、以及函数的指纹(S)
 " 	--extra=+q : 为标签增加类修饰符。注意，如果没有此选项，将不能对类成员补全
-if isdirectory(expand("~/.vim/plugged/OmniCppComplete'"))
+if g:dst_complete_mode is# 'old' && isdirectory(expand("~/.vim/plugged/OmniCppComplete"))
 	let g:OmniCpp_DefaultNamespaces=["std"]
 	let g:OmniCpp_MayCompleteScope=1
 	let g:OmniCpp_SelectFirstItem=2
@@ -553,6 +560,68 @@ endif
 if isdirectory(expand("~/.vim/plugged/indentLine"))
 	"let g:indentLine_char = '|'
 	"let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+endif
+
+" --------------------------------------------------------}}}2
+" 配置YouCompleteMe插件
+" --------------------------------------------------------{{{2
+if g:dst_complete_mode is# 'YouCompleteMe' && isdirectory(expand("~/.vim/plugged/YouCompleteMe"))
+	" Python Semantic Completion
+	"let g:ycm_python_binary_path = '/usr/bin/python3'
+
+	" 寻找全局配置文件
+	"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+	"let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+	let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+
+	" 禁用syntastic来对python检查
+	let g:syntastic_ignore_files=[".*\.py$"]
+
+	" 使用ctags生成的tags文件，开启YCM基于标签引擎
+	let g:ycm_collect_identifiers_from_tags_files = 1
+
+	" 语法关键字补全
+	let g:ycm_seed_identifiers_with_syntax = 1
+	" 在接受补全后不分裂出一个窗口显示接受的项
+	set completeopt-=preview
+	" 让补全行为与一般的IDE一致
+	set completeopt=longest,menu
+	" 不显示开启vim时检查ycm_extra_conf文件的信息
+	"let g:ycm_confirm_extra_conf=0
+	let g:ycm_confirm_extra_conf=1
+	" 每次重新生成匹配项，禁止缓存匹配项
+	let g:ycm_cache_omnifunc=0
+	" 在注释中也可以补全
+	let g:ycm_complete_in_comments=1
+	" 在字符串输入中也能补全
+	let g:ycm_complete_in_strings = 1
+	" 注释和字符串中的文字也会被收入补全
+	let g:ycm_collect_identifiers_from_comments_and_strings = 1
+	" 从第2个键入字符就开始罗列匹配项
+	let g:ycm_min_num_of_chars_for_completion=2
+	" 错误标识符
+	let g:ycm_error_symbol='>>'
+	" 警告标识符
+	let g:ycm_warning_symbol='>*'
+	" 不查询ultisnips提供的代码模板补全，如果需要，设置成1即可
+	let g:ycm_use_ultisnips_completer=1
+
+	" 设置转到定义处的快捷键为ALT+G，未测出效果
+	"nmap <M-g> :YcmCompleter GoToDefinitionElseDeclaration <C-R>=expand("<cword>")<CR><CR>
+	" 跳转快捷键
+	"nnoremap <c-k> :YcmCompleter GoToDeclaration<CR>
+	"nnoremap <c-h> :YcmCompleter GoToDefinition<CR>
+	"nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+	" 弹出列表时选择第1项的快捷键(默认为<TAB>和<Down>)
+	"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+	" 弹出列表时选择前1项的快捷键(默认为<S-TAB>和<UP>)
+	"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+	" 主动补全, 默认为<C-Space>
+	"let g:ycm_key_invoke_completion = ['<C-Space>']
+	" 停止显示补全列表(防止列表影响视野), 可以按<C-Space>重新弹出
+	"let g:ycm_key_list_stop_completion = ['<C-y>']
+
 endif
 
 " --------------------------------------------------------}}}2
@@ -654,7 +723,11 @@ nnoremap <silent> <F3> :NERDTreeToggle<cr>
 if has('python2') " only python2
 	nnoremap <silent> <F5> :ConqueTermSplit bash<cr>
 else
-	nnoremap <silent> <F5> :terminal<cr>
+	if has('terminal')
+		nnoremap <silent> <F5> :terminal<cr>
+	else
+		nnoremap <silent> <F5> :echomsg 'not support \<F5\> keymap'<cr>
+	endif
 endif
 nnoremap <silent> <F6> :call F6_shell()<cr>
 nnoremap <silent> <F7> :call F7_shell()<cr>
