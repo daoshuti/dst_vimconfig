@@ -139,8 +139,11 @@ Plug 'mhinz/vim-startify'
 Plug 'tomasr/molokai'
 
 " airline 状态栏插件
-Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
+
+" lightline 状态栏插件
+Plug 'itchyny/lightline.vim'
 
 " 将代码行最后无效的空格标红
 Plug 'bronson/vim-trailing-whitespace'
@@ -305,12 +308,16 @@ endif
 "else
 "	set background=dark  " 配色主题的色系设置为dark
 "endif
-set background=dark
 "if isdirectory(expand("~/.vim/plugged/vim-colors-solarized"))
 "	let g:solarized_termcolors=256
 "	colorscheme solarized
 "endif
+
+" --------------------------------------------------------}}}2
+" molokai插件
+" --------------------------------------------------------{{{2
 if isdirectory(expand("~/.vim/plugged/molokai"))
+	set background=dark
 	colorscheme molokai
 endif
 
@@ -318,32 +325,40 @@ endif
 " 配置airline，美化状态栏和顶部tab
 " --------------------------------------------------------{{{2
 
-if isdirectory(expand("~/.vim/plugged/vim-airline"))
-	"if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
-	if 0
-		" ~/.vim/plugged/vim-airline-themes/autoload/airline/路径下可以查看配色
-		"let g:airline_theme='solarized'   " airline配色
-		"let g:airline_theme='term_light'  " airline配色
-		"let g:airline_theme='biogoo'      " airline配色
-		let g:airline_theme='powerlineish'
-	endif
+"if isdirectory(expand("~/.vim/plugged/vim-airline"))
+"	"if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
+"	"	" ~/.vim/plugged/vim-airline-themes/autoload/airline/路径下可以查看配色
+"	"	"let g:airline_theme='solarized'   " airline配色
+"	"	"let g:airline_theme='term_light'  " airline配色
+"	"	"let g:airline_theme='biogoo'      " airline配色
+"	"	let g:airline_theme='powerlineish'
+"	"endif
+"
+"	let g:airline#extensions#tabline#enabled = 1 "顶部tab显示"
+"	let g:airline#extensions#tabline#left_sep = ' '
+"	let g:airline#extensions#tabline#left_alt_sep = '|'
+"	let g:airline#extensions#tabline#formatter = 'default'
+"	let g:airline#extensions#whitespace#enabled=0
+"
+"	let g:airline_powerline_fonts=0
+"	if !exists('g:airline_symbols')
+"		let g:airline_symbols = {}
+"	endif
+"	if !has("gui_running")
+"		let g:airline_symbols.branch = ''
+"		let g:airline_symbols.readonly = 'R'
+"		let g:airline_symbols.linenr = 'L:'
+"		let g:airline_symbols.maxlinenr = ' C'
+"	endif
+"endif
 
-	let g:airline#extensions#tabline#enabled = 1 "顶部tab显示"
-	let g:airline#extensions#tabline#left_sep = ' '
-	let g:airline#extensions#tabline#left_alt_sep = '|'
-	let g:airline#extensions#tabline#formatter = 'default'
-	let g:airline#extensions#whitespace#enabled=0
-
-	let g:airline_powerline_fonts=0
-	if !exists('g:airline_symbols')
-		let g:airline_symbols = {}
-	endif
-	if !has("gui_running")
-		let g:airline_symbols.branch = ''
-		let g:airline_symbols.readonly = 'R'
-		let g:airline_symbols.linenr = 'L:'
-		let g:airline_symbols.maxlinenr = ' C'
-	endif
+" --------------------------------------------------------}}}2
+" 配置lightline，美化状态栏
+" --------------------------------------------------------{{{2
+if isdirectory(expand("~/.vim/plugged/lightline.vim"))
+	let g:lightline = {
+				\ 'colorscheme': 'wombat',
+				\ }
 endif
 
 " --------------------------------------------------------}}}2
@@ -423,15 +438,14 @@ endif
 " zC: close a fold your cursor is on recursively //递归关闭光标所在的折叠
 
 "if isdirectory(expand("~/.vim/plugged/vim-markdown/"))
-if 0
-	let g:vim_markdown_folding_disabled = 1 "禁用代码折叠
-	set [no]foldenable "vim自带的折叠功能是否开启
-
-	autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-	let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-	let g:markdown_syntax_conceal = 0 "关闭Markdown语法高亮
-	let g:markdown_minlines = 100 "支持100行显示（默认50行），开启后可能会卡
-endif
+"	let g:vim_markdown_folding_disabled = 1 "禁用代码折叠
+"	set [no]foldenable "vim自带的折叠功能是否开启
+"
+"	autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+"	let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+"	let g:markdown_syntax_conceal = 0 "关闭Markdown语法高亮
+"	let g:markdown_minlines = 100 "支持100行显示（默认50行），开启后可能会卡
+"endif
 
 " --------------------------------------------------------}}}2
 " 配置vim_current_word，自动高亮光标选中的单词
@@ -498,20 +512,19 @@ endif
 " 配置CrtlP插件
 " --------------------------------------------------------{{{2
 "if isdirectory(expand("~/.vim/plugged/ctrlp.vim"))
-if 0
-	let g:ctrlp_map = '<c-p>'
-	let g:ctrlp_cmd = 'CtrlP'
-
-	set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-	set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-
-	let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-	let g:ctrlp_custom_ignore = {
-				\ 'dir':  '\v[\/]\.(git|hg|svn)$',
-				\ 'file': '\v\.(exe|so|dll)$',
-				\ 'link': 'some_bad_symbolic_links',
-				\ }
-endif
+"	let g:ctrlp_map = '<c-p>'
+"	let g:ctrlp_cmd = 'CtrlP'
+"
+"	set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+"	set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+"
+"	let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+"	let g:ctrlp_custom_ignore = {
+"				\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+"				\ 'file': '\v\.(exe|so|dll)$',
+"				\ 'link': 'some_bad_symbolic_links',
+"				\ }
+"endif
 
 " --------------------------------------------------------}}}2
 " 配置OmniCppComplete插件
