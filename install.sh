@@ -28,7 +28,7 @@ if [ -d ~/.vim -o -f ~/.vimrc ]; then
 fi
 
 echo "Link dst_vimconfig/imrc to ~/.vimrc ..."
-ln -s vimrc $HOME/.vimrc
+ln -s ~/.dst_vimconfig/vimrc $HOME/.vimrc
 
 echo "Installing vim-plug to ~/.vim/autoload/plug.vim ..."
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
