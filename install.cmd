@@ -56,10 +56,10 @@ if not %errorlevel% == 0 (
 echo Check your old vim settings ...
 
 if exist "%HOME%\.vimrc" del /p /f /s "%HOME%\.vimrc" || goto err
+if exist "%HOME%\.vim" call :delete_vim_folder
 
 if %has_vim% == True (
 	if exist "%HOME%\_vimrc" del /p /f /s "%HOME%\_vimrc" || goto err
-	if exist "%HOME%\.vim" call :delete_vim_folder
 )
 
 if %has_nvim% == True (
