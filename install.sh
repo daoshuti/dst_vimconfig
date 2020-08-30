@@ -39,6 +39,6 @@ mkdir -p ~/.vim/shell
 cp ./create_cscope.sh ~/.vim/shell
 
 echo "Installing vim plugins ..."
-vim +PlugInstall
+vim +PlugInstall! +PlugClean +qall
 
 echo "Done."
