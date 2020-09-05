@@ -101,7 +101,7 @@ if has("gui_running")
     source $VIMRUNTIME/delmenu.vim " the original menubar has an error on win32, so
     source $VIMRUNTIME/menu.vim    " use this menubar
     language messages zh_CN.utf-8 " use chinese messages if has
-    set guifont=Consolas:h14
+    set guifont=Consolas:h12
 endif
 
 " ========================================================}}}1
