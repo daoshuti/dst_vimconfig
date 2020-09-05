@@ -16,9 +16,14 @@
 ## 1. 安装
 
 ```
+curl https://raw.githubusercontent.com/daoshuti/dst_vimconfig/master/install.sh | bash
+```
+
+or
+
+```
 git clone https://github.com/daoshuti/dst_vimconfig.git ~/.dst_vimconfig
-cd ~/.dst_vimconfig
-bash ./install.sh
+bash ~/.dst_vimconfig/install.sh
 ```
 
 ## 2. 快捷键
@@ -29,7 +34,7 @@ bash ./install.sh
 
 |         <Fn>键的功能         |       cscope命令说明          |
 |------------------------------|-------------------------------|
-| <F1> vim help 窗口           | :cs show 查看已加载的数据库   |
+| <F1> Startify 窗口           | :cs show 查看已加载的数据库   |
 | <F2> tagbar   窗口           | :cs add  加载指定的数据库     |
 | <F3> 文件浏览 窗口           | ,ss      查找symbol           |
 | <F4> 切换窗口 (panel & tag)  | ,sg      查找定义             |

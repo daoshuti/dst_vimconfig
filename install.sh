@@ -4,7 +4,6 @@
 # File Name: install.sh
 # Description: install and reinstall dst_vimconfig
 
-
 echo "Installing vim ..."
 sudo apt install vim
 
@@ -27,6 +26,15 @@ if [ -d ~/.vim -o -f ~/.vimrc ]; then
 	exit 1
 fi
 
+if [ -d ~/.dst_vimconfig ]; then
+	echo "clone dst_vimconfig ..."
+	git clone https://github.com/daoshuti/dst_vimconfig.git ~/.dst_vimconfig
+else
+	echo "update dst_vimconfig ..."
+	cd ~/.dst_vimconfig
+	git pull origin master
+fi
+
 echo "Link dst_vimconfig/imrc to ~/.vimrc ..."
 ln -s ~/.dst_vimconfig/vimrc $HOME/.vimrc
 
@@ -36,9 +44,9 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 echo "Installing dst_vimconfig/create_cscope.sh to ~/.vim/shell/create_cscope.sh ..."
 mkdir -p ~/.vim/shell
-cp ./create_cscope.sh ~/.vim/shell
+cp ~/.dst_vimconfig/create_cscope.sh ~/.vim/shell
 
 echo "Installing vim plugins ..."
-vim +PlugInstall
+vim +PlugInstall! +PlugClean +qall
 
 echo "Done."

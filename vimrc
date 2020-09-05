@@ -278,7 +278,7 @@ if isdirectory(expand("~/.vim/plugged/vim-startify"))
 				\ ' +------------------------------+-------------------------------+-----------------------+',
 				\ ' |         <Fn>键的功能         |       cscope命令说明          |     标签页快捷键      |',
 				\ ' +------------------------------+-------------------------------+-----------------------+',
-				\ ' | <F1> vim help 窗口           | :cs show 查看已加载的数据库   | ,c   创建新标签页     |',
+				\ ' | <F1> Startify 窗口           | :cs show 查看已加载的数据库   | ,c   创建新标签页     |',
 				\ ' | <F2> tagbar   窗口           | :cs add  加载指定的数据库     | ,x   删除标签页       |',
 				\ ' | <F3> 文件浏览 窗口           | ,ss      查找symbol           | ,[   移动到前一个标签 |',
 				\ ' | <F4> 切换窗口 (panel & tag)  | ,sg      查找定义             | ,]   移动到下一个标签 |',
@@ -734,6 +734,7 @@ endfunction
 " <F9> 生成tags数据库文件。之后就可以使用ctrl+] 和 ctrl+o(或者ctrl+t)
 " <F10> 以绝对路径在当前目录下，生成cscope数据库文件<目录名.out>
 " <F12> 生成cscope.out数据库文件
+nnoremap <silent> <F1> :Startify<CR>
 nnoremap <silent> <F2> :TagbarToggle<CR>
 nnoremap <silent> <F3> :NERDTreeToggle<cr>
 "nnoremap <silent> <F4> :ALEToggle<cr>
