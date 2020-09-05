@@ -11,7 +11,7 @@ echo "Installing ctags cscope ..."
 sudo apt install ctags cscope
 
 read -N 1 -p "Do you want delete old config?(y/n):" answer
-echo ""
+echo -e "\n"
 if [ $answer == "Y" -o $answer == "y" ]; then
 	echo "Remove old vimcofnig ..."
 	echo "Delete ~/.vim ..."
@@ -26,7 +26,7 @@ if [ -d ~/.vim -o -f ~/.vimrc ]; then
 	exit 1
 fi
 
-if [ -d ~/.dst_vimconfig ]; then
+if [ ! -d ~/.dst_vimconfig ]; then
 	echo "clone dst_vimconfig ..."
 	git clone https://github.com/daoshuti/dst_vimconfig.git ~/.dst_vimconfig
 else
