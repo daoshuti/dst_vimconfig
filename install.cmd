@@ -1,6 +1,6 @@
 @echo off
 :: Author: wanghan
-:: Created Time : 2020Äê08ÔÂ29ÈÕ 00:57:35
+:: Created Time : 2020??08??29?? 00:57:35
 :: File Name: install.cmd
 :: Description: install and reinstall dst_vimconfig
 
@@ -74,7 +74,7 @@ if %has_nvim% == True (
 echo Load %REPO_PATH% ...
 if not exist %REPO_PATH% (
 	echo clone %REPO_PATH% ...
-	git clone %REPO_URL% %REPO_URL% || goto err
+	git clone %REPO_URL% %REPO_PATH% || goto err
 ) else (
 	cd /d %REPO_PATH%
 	echo update %REPO_PATH% ...
