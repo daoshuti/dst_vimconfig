@@ -74,7 +74,7 @@ if %has_nvim% == True (
 echo Load %REPO_PATH% ...
 if not exist %REPO_PATH% (
 	echo clone %REPO_PATH% ...
-	git clone %REPO_URL% %APP_PATH% || goto err
+	git clone %REPO_URL% %REPO_URL% || goto err
 ) else (
 	cd /d %REPO_PATH%
 	echo update %REPO_PATH% ...
@@ -89,8 +89,9 @@ if not exist "%HOME%\.vim\autoload\plug.vim" (
 	if not exist "%HOME%\.vim" mkdir "%HOME%\.vim"
 	if not exist "%HOME%\.vim\autoload" mkdir "%HOME%\.vim\autoload"
 	echo Download vim-plug to "%HOME%\.vim\autoload\plug.vim"
-	::powershell (New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim',$ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath('~\.vim\autoload\plug.vim'))
-	sh -c "curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+	git clone https://github.com/junegunn/vim-plug.git "%HOME%\.vim\vim-plug"
+	copy "%HOME%\.vim\vim-plug\plug.vim" "%HOME%\.vim\autoload\plug.vim"
+	rd /q /s "%HOME%\.vim\vim-plug"
 	if not exist "%HOME%\.vim\autoload\plug.vim" goto err
 ) else (
 	echo %HOME%\.vim\autoload\plug.vim is ready
