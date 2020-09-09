@@ -55,7 +55,7 @@ set shiftwidth=0        " 换行时使用0个空格，使用tab键风格时如�
 set number              " 显示行号
 set t_Co=256            " 开启256颜色
 set scrolloff=5         " 键盘上下滚动屏幕的最小临界行数
-set cursorcolumn        " 高亮光标所在屏幕列
+"set cursorcolumn        " 高亮光标所在屏幕列
 set cursorline          " 高亮光标所在屏幕行
 set nowrap              " 禁止文字自动换行
 "set textwidth=256      " 超过256个字符自动换行
@@ -458,7 +458,7 @@ endif
 if isdirectory(expand("~/.vim/plugged/vim_current_word"))
 	let g:vim_current_word#enabled = 1 "打开vim_current_word插件
 	"let g:vim_current_word#highlight_twins = 1 "高亮相似的词
-	let g:vim_current_word#highlight_current_word = 1 "高亮选中的单词
+	let g:vim_current_word#highlight_current_word = 0 "高亮选中的单词
 	"let g:vim_current_word#highlight_delay = 1000 "延时1000ms再highlight
 	"let g:vim_current_word#highlight_only_in_focused_window = 1 "只高亮当前聚焦窗口
 endif
