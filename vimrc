@@ -690,7 +690,7 @@ endfunction
 " --------------------------------------------------------{{{2
 let s:f6_flag=0
 let s:f7_flag=0
-function F6_shell()
+function! F6_shell()
 	if (s:f6_flag == 0)
 		set paste
 		set nonumber
@@ -714,7 +714,7 @@ endfunction
 " --------------------------------------------------------}}}2
 " <F7>快捷键依赖的运行vimscript脚本的函数
 " --------------------------------------------------------{{{2
-function F7_shell()
+function! F7_shell()
 	if (s:f7_flag == 0)
 		set foldcolumn=5
 		set foldmethod=indent
@@ -841,7 +841,7 @@ endif
 autocmd BufNewFile *.c,*.cpp,*.sh,*.py,*.java exec ":call SetTitle()"
 
 "定义函数SetTitle，自动插入文件头
-func SetTitle()
+function! SetTitle()
 	"如果文件类型为.c或者.cpp文件
 	if (&filetype == 'c' || &filetype == 'cpp')
 		call setline(1, "/*************************************************************************")
