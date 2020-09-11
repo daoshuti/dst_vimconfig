@@ -168,21 +168,18 @@ Plug 'google/vim-searchindex'
 Plug 'yianwillis/vimcdoc'
 
 " Terminal
-if has('python2') " only python2
-	Plug 'rosenfeld/conque-term'
-endif
+"if has('python2') " only python2
+"	Plug 'rosenfeld/conque-term'
+"endif
 
 " 格式化对齐，代码中的等号
 "Plug 'junegunn/vim-easy-align' " 有趣，但是非高频使用，暂时注释掉
-
-"buffer管理
-"Plug 'fholgado/minibufexpl.vim'
 
 " markdown
 "Plug 'plasticboy/vim-markdown'
 
 " ctrlp快速搜索文件并打开
-"Plug 'kien/ctrlp.vim' " 有用，但是非高频使用注释掉
+Plug 'kien/ctrlp.vim'
 
 " 输入时自动配对括号
 Plug 'jiangmiao/auto-pairs'
@@ -238,6 +235,9 @@ Plug 'tpope/vim-fugitive', { 'on': 'Git' }
 " 窗口切换
 Plug 't9md/vim-choosewin', { 'on': 'ChooseWin' }
 
+"buffer管理
+Plug 'fholgado/minibufexpl.vim', { 'on': 'MiniBufExplorer' }
+
 " 异步检查vim中的语法问题并提示
 "Plug 'w0rp/ale', { 'on': 'ALEToggle' }
 
@@ -275,26 +275,6 @@ if isdirectory(expand("~/.vim/plugged/vim-startify"))
 				\ ' \/__,_ /\/___/   \/__/     \/__/    \/_/\/_/\/_/\/_/\/____/\/___/  \/_/\/_/\/_/   \/_/\/___L\ \',
 				\ '                                                                                         /\____/',
 				\ '                                                                                         \_/__/ ',
-				\ ' +------------------------------+-------------------------------+-----------------------+',
-				\ ' |         <Fn>键的功能         |       cscope命令说明          |     标签页快捷键      |',
-				\ ' +------------------------------+-------------------------------+-----------------------+',
-				\ ' | <F1> Startify 窗口           | :cs show 查看已加载的数据库   | ,c   创建新标签页     |',
-				\ ' | <F2> tagbar   窗口           | :cs add  加载指定的数据库     | ,x   删除标签页       |',
-				\ ' | <F3> 文件浏览 窗口           | ,ss      查找symbol           | ,[   移动到前一个标签 |',
-				\ ' | <F4> 切换窗口 (panel & tag)  | ,sg      查找定义             | ,]   移动到下一个标签 |',
-				\ ' | <F5> 打开终端                | ,sd      查找本函数调用的函数 |-----------------------+',
-				\ ' | <F6> 粘贴模式                | ,sc      查找调用本函数的函数 |      ctags跳转        |',
-				\ ' | <F7> 代码折叠                | ,st      查找指定的字符串     |-----------------------+',
-				\ ' | <F9> 生成tags                | ,se      查找egrep模式        | Ctrl+]   跳转到定义   |',
-				\ ' | <F12>生成cscope.out          | ,sf      查找并打开文件       | Ctrl+o   返回上一级   |',
-				\ ' |                              | ,si      查找包含本文件的文件 | :GutentagsUpdate 更新 |',
-				\ ' +------------------------------+-------------------------------+-----------------------+',
-				\ ' | :Git 使用git命令 :vsp 竖切窗口 :!<cmd> 执行命令 :r!<cmd> 将命令返回值放入当前编辑区  |',
-				\ ' | :Man 查看man手册 :sp  横切窗口 :sh  打开shell   :%s/<old>/<new>/g 全局替换字符串     |',
-				\ ' | /str 搜索字符串  y复制  d剪切  p粘贴  u撤销  Ctrl-r 反撤销  Ctrl-v块编辑  V整行块编辑|',
-				\ ' +--------------------------------------------------------------------------------------+',
-				\ ' |   请在Normal模式使用上述快捷键 (Esc进入Normal, i进入Insert模式, v进入Visual模式)     |',
-				\ ' +--------------------------------------------------------------------------------------+',
 				\]
 
 	"let g:startify_custom_footer = [
@@ -515,20 +495,20 @@ endif
 "--------------------------------------------------------}}}2
 " 配置CrtlP插件
 " --------------------------------------------------------{{{2
-"if isdirectory(expand("~/.vim/plugged/ctrlp.vim"))
-"	let g:ctrlp_map = '<c-p>'
-"	let g:ctrlp_cmd = 'CtrlP'
-"
-"	set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-"	set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-"
-"	let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-"	let g:ctrlp_custom_ignore = {
-"				\ 'dir':  '\v[\/]\.(git|hg|svn)$',
-"				\ 'file': '\v\.(exe|so|dll)$',
-"				\ 'link': 'some_bad_symbolic_links',
-"				\ }
-"endif
+if isdirectory(expand("~/.vim/plugged/ctrlp.vim"))
+	let g:ctrlp_map = '<c-p>'
+	let g:ctrlp_cmd = 'CtrlP'
+
+	set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+	set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+	let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+	let g:ctrlp_custom_ignore = {
+				\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+				\ 'file': '\v\.(exe|so|dll)$',
+				\ 'link': 'some_bad_symbolic_links',
+				\ }
+endif
 
 " --------------------------------------------------------}}}2
 " 配置OmniCppComplete插件
@@ -732,7 +712,7 @@ endfunction
 " <F2> vim help 窗口
 " <F2> tagbar   窗口
 " <F3> 文件浏览 窗口
-" <F4> 语法检查，并提示
+" <F4> minibufexpl
 " <F6> 粘贴模式
 " <F7> 切换代码折叠方式（maker改为indent）
 " <F9> 生成tags数据库文件。之后就可以使用ctrl+] 和 ctrl+o(或者ctrl+t)
@@ -741,16 +721,7 @@ endfunction
 nnoremap <silent> <F1> :Startify<CR>
 nnoremap <silent> <F2> :TagbarToggle<CR>
 nnoremap <silent> <F3> :NERDTreeToggle<cr>
-"nnoremap <silent> <F4> :ALEToggle<cr>
-if has('python2') " only python2
-	nnoremap <silent> <F5> :ConqueTermSplit bash<cr>
-else
-	if has('terminal')
-		nnoremap <silent> <F5> :terminal<cr>
-	else
-		nnoremap <silent> <F5> :echomsg 'not support \<F5\> keymap'<cr>
-	endif
-endif
+nnoremap <silent> <F4> :MiniBufExplorer<cr>
 nnoremap <silent> <F6> :call F6_shell()<cr>
 nnoremap <silent> <F7> :call F7_shell()<cr>
 nnoremap <silent> <F9> :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>
@@ -822,8 +793,7 @@ nnoremap <silent> <leader>[ :tabp<cr>
 "	|      | <NOP>      | Disable predefined keymap     |
 if isdirectory(expand("~/.vim/plugged/vim-choosewin"))
 	" invoke with '-'
-	"nmap  -  <Plug>(choosewin)
-	nnoremap <silent> <F4> :ChooseWin<cr>
+	nmap  -  <Plug>(choosewin)
 	" if you want to use overlay feature
 	let g:choosewin_overlay_enable = 1
 endif

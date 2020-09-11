@@ -53,12 +53,15 @@ Visual模式 | 选择文本 | `v`，文本块选择<br>`V`，文本行选择
  F1  | Startify 窗口（首页）
  F2  | tagbar   窗口（代码速览）
  F3  | 文件浏览 窗口（目录树）
- F4  | 切换窗口
- F5  | 打开终端
+ F4  | MiniBufExplorer
  F6  | 粘贴模式（配合Shift + Insert插入文本）
  F7  | 代码折叠
- F9  | 生成tags（使用gutentags后，基本废弃）
- F12 | 生成cscope.out（使用gutentags后，基本废弃）
+
+
+其他好用的快捷键：
+
+* `-` 可视化切换窗口（从效率角度考虑还是推荐Ctrl-w切换窗口）
+* `Ctrl - p` 快速搜索文件
 
 ### 2.3 追代码的快捷键
 
