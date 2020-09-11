@@ -178,7 +178,7 @@ Plug 'yianwillis/vimcdoc'
 " markdown
 "Plug 'plasticboy/vim-markdown'
 
- ctrlp快速搜索文件并打开
+" ctrlp快速搜索文件并打开
 Plug 'kien/ctrlp.vim'
 
 " 输入时自动配对括号
