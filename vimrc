@@ -236,7 +236,7 @@ Plug 'tpope/vim-fugitive', { 'on': 'Git' }
 Plug 't9md/vim-choosewin', { 'on': 'ChooseWin' }
 
 "buffer管理
-Plug 'fholgado/minibufexpl.vim', { 'on': 'MiniBufExplorer' }
+Plug 'fholgado/minibufexpl.vim', { 'on': 'MBEOpen' }
 
 " 异步检查vim中的语法问题并提示
 "Plug 'w0rp/ale', { 'on': 'ALEToggle' }
@@ -721,7 +721,7 @@ endfunction
 nnoremap <silent> <F1> :Startify<CR>
 nnoremap <silent> <F2> :TagbarToggle<CR>
 nnoremap <silent> <F3> :NERDTreeToggle<cr>
-nnoremap <silent> <F4> :MiniBufExplorer<cr>
+nnoremap <silent> <F4> :MBEOpen<cr>
 nnoremap <silent> <F6> :call F6_shell()<cr>
 nnoremap <silent> <F7> :call F7_shell()<cr>
 nnoremap <silent> <F9> :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>
