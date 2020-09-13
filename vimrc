@@ -89,6 +89,9 @@ set showcmd             " 显示命令
 set nobackup            " 取消备份
 set noswapfile          " 不使用swapfile文件（不能灾难恢复）
 
+" 让配置变更立即生效
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
 " gui settings
 if has("gui_running")
     "set guioptions-=m " no menubar 将Gvim中的菜单栏去除
@@ -310,12 +313,14 @@ endif
 " --------------------------------------------------------{{{2
 
 "if isdirectory(expand("~/.vim/plugged/vim-airline"))
+"
 "	"if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
 "	"	" ~/.vim/plugged/vim-airline-themes/autoload/airline/路径下可以查看配色
 "	"	"let g:airline_theme='solarized'   " airline配色
 "	"	"let g:airline_theme='term_light'  " airline配色
 "	"	"let g:airline_theme='biogoo'      " airline配色
-"	"	let g:airline_theme='powerlineish'
+"	"	"let g:airline_theme='powerlineish'" airline配色
+"	"	let g:airline_theme='molokai'
 "	"endif
 "
 "	let g:airline#extensions#tabline#enabled = 1 "顶部tab显示"
@@ -343,6 +348,28 @@ if isdirectory(expand("~/.vim/plugged/lightline.vim"))
 	let g:lightline = {
 				\ 'colorscheme': 'wombat',
 				\ }
+	let g:lightline.component = {
+				\ 'mode': '%{lightline#mode()}',
+				\ 'absolutepath': '%F',
+				\ 'relativepath': '%f',
+				\ 'filename': '%F',
+				\ 'modified': '%M',
+				\ 'bufnum': '%n',
+				\ 'paste': '%{&paste?"PASTE":""}',
+				\ 'readonly': '%R',
+				\ 'charvalue': '%b',
+				\ 'charvaluehex': '%B',
+				\ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
+				\ 'fileformat': '%{&ff}',
+				\ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
+				\ 'percent': '%3p%%',
+				\ 'percentwin': '%P',
+				\ 'spell': '%{&spell?&spelllang:""}',
+				\ 'lineinfo': '%3l:%-2c',
+				\ 'line': '%l',
+				\ 'column': '%c',
+				\ 'close': '%999X X ',
+				\ 'winnr': '%{winnr()}' }
 endif
 
 " --------------------------------------------------------}}}2
