@@ -710,8 +710,9 @@ function! F6_shell()
 		set nopaste
 		set number
 		if (s:f7_flag == 1)
-			set foldcolumn=5
-			set foldmethod=indent
+			"set foldcolumn=5
+			"set foldmethod=indent
+			set foldmethod=syntax
 		endif
 		let s:f6_flag=0
 	endif
@@ -723,8 +724,9 @@ endfunction
 " --------------------------------------------------------{{{2
 function! F7_shell()
 	if (s:f7_flag == 0)
-		set foldcolumn=5
-		set foldmethod=indent
+		"set foldcolumn=5
+		"set foldmethod=indent
+		set foldmethod=syntax
 		let s:f7_flag=1
 	else
 		set foldcolumn=0
