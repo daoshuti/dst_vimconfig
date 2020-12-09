@@ -155,7 +155,7 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'dominikduda/vim_current_word'
 
 " 缩进UI标识
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 
 " 彩虹括号
 Plug 'luochen1990/rainbow'
@@ -466,8 +466,8 @@ if isdirectory(expand("~/.vim/plugged/vim_current_word"))
 	let g:vim_current_word#enabled = 1 "打开vim_current_word插件
 	"let g:vim_current_word#highlight_twins = 1 "高亮相似的词
 	let g:vim_current_word#highlight_current_word = 0 "高亮选中的单词
-	"let g:vim_current_word#highlight_delay = 1000 "延时1000ms再highlight
-	"let g:vim_current_word#highlight_only_in_focused_window = 1 "只高亮当前聚焦窗口
+	let g:vim_current_word#highlight_delay = 1000 "延时1000ms再highlight
+	let g:vim_current_word#highlight_only_in_focused_window = 1 "只高亮当前聚焦窗口
 endif
 
 " --------------------------------------------------------}}}2
